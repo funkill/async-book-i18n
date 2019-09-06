@@ -1,0 +1,397 @@
+<!DOCTYPE HTML>
+<html lang="zh-tw" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>select! - Rust 非同步程式設計</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li><a href="../01_getting_started/01_chapter.html"><strong aria-hidden="true">1.</strong> 開始上手</a></li><li><ol class="section"><li><a href="../01_getting_started/02_why_async.html"><strong aria-hidden="true">1.1.</strong> 為什麼是非同步？</a></li><li><a href="../01_getting_started/03_state_of_async_rust.html"><strong aria-hidden="true">1.2.</strong> 非同步 Rust 的現況</a></li><li><a href="../01_getting_started/04_async_await_primer.html"><strong aria-hidden="true">1.3.</strong> async/.await 入門</a></li><li><a href="../01_getting_started/05_http_server_example.html"><strong aria-hidden="true">1.4.</strong> 案例：HTTP 伺服器</a></li></ol></li><li><a href="../02_execution/01_chapter.html"><strong aria-hidden="true">2.</strong> 揭秘：執行 Future 與任務</a></li><li><ol class="section"><li><a href="../02_execution/02_future.html"><strong aria-hidden="true">2.1.</strong> Future Trait</a></li><li><a href="../02_execution/03_wakeups.html"><strong aria-hidden="true">2.2.</strong> 透過 Waker 喚醒任務</a></li><li><a href="../02_execution/04_executor.html"><strong aria-hidden="true">2.3.</strong> 案例：打造一個執行器</a></li><li><a href="../02_execution/05_io.html"><strong aria-hidden="true">2.4.</strong> 執行器與系統輸入輸出</a></li></ol></li><li><a href="../03_async_await/01_chapter.html"><strong aria-hidden="true">3.</strong> async/await</a></li><li><a href="../04_pinning/01_chapter.html"><strong aria-hidden="true">4.</strong> Pinning</a></li><li><a href="../05_streams/01_chapter.html"><strong aria-hidden="true">5.</strong> Streams</a></li><li><ol class="section"><li><a href="../05_streams/02_iteration_and_concurrency.html"><strong aria-hidden="true">5.1.</strong> 迭代與並行</a></li></ol></li><li><a href="../06_multiple_futures/01_chapter.html"><strong aria-hidden="true">6.</strong> 同時執行多個 Future</a></li><li><ol class="section"><li><a href="../06_multiple_futures/02_join.html"><strong aria-hidden="true">6.1.</strong> join!</a></li><li><a href="../06_multiple_futures/03_select.html" class="active"><strong aria-hidden="true">6.2.</strong> select!</a></li><li><a href="../404.html"><strong aria-hidden="true">6.3.</strong> TODO: 產生 Spawning</a></li><li><a href="../404.html"><strong aria-hidden="true">6.4.</strong> TODO: 取消與逾時</a></li><li><a href="../404.html"><strong aria-hidden="true">6.5.</strong> TODO: FuturesUnordered</a></li></ol></li><li><a href="../404.html"><strong aria-hidden="true">7.</strong> TODO: I/O</a></li><li><ol class="section"><li><a href="../404.html"><strong aria-hidden="true">7.1.</strong> TODO: AsyncRead 與 AsyncWrite</a></li></ol></li><li><a href="../404.html"><strong aria-hidden="true">8.</strong> TODO: 非同步設計模式：解法與建議</a></li><li><ol class="section"><li><a href="../404.html"><strong aria-hidden="true">8.1.</strong> TODO: 打造伺服器與請求/回應模式</a></li><li><a href="../404.html"><strong aria-hidden="true">8.2.</strong> TODO: 共享狀態管理</a></li></ol></li><li><a href="../404.html"><strong aria-hidden="true">9.</strong> TODO: 生態系：Tokio 與更多</a></li><li><ol class="section"><li><a href="../404.html"><strong aria-hidden="true">9.1.</strong> TODO: 還有好多好多？...</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Rust 非同步程式設計</h1>
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#select" id="select"><code>select!</code></a></h1>
+<p><code>futures::select</code> 巨集可以同時執行多個 future，並在任何一個 future 完成是迅速回應使用者。</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use futures::{
+    future::FutureExt, // for `.fuse()`
+    pin_mut,
+    select,
+};
+
+async fn task_one() { /* ... */ }
+async fn task_two() { /* ... */ }
+
+async fn race_tasks() {
+    let t1 = task_one().fuse();
+    let t2 = task_two().fuse();
+
+    pin_mut!(t1, t2);
+
+    select! {
+        () = t1 =&gt; println!(&quot;task one completed first&quot;),
+        () = t2 =&gt; println!(&quot;task two completed first&quot;),
+    }
+}
+#}</code></pre></pre>
+<p>上面這個函式將並行執行 <code>t1</code> 與 <code>t2</code>。當 <code>t1</code> 或 <code>t2</code> 其中一個完成了，對應的處理程序就會呼叫 <code>println!</code>，這個函式就不會完成剩下的任務，而會直接結束。</p>
+<p><code>select</code> 基本的語法是 <code>&lt;pattern&gt; = &lt;expression&gt; =&gt; &lt;code&gt;</code>，你想要從多少個 future 中做 <code>select</code> 就重複多少次。</p>
+<h2><a class="header" href="#default---與-complete--" id="default---與-complete--"><code>default =&gt; ...</code> 與 <code>complete =&gt; ...</code></a></h2>
+<p><code>select</code> 也支援 <code>default</code> 與 <code>complete</code> 的流程分支。</p>
+<p><code>default</code> 分支會在所有被 <code>select</code> 的 future 都尚未完成時。一個包含 <code>default</code> 分支的 <code>select</code> 總是會立刻返回，因為開始執行時不會有任何 future 準備就緒。</p>
+<p><code>complete</code> 分支則負責處理這個狀況：當所有被 <code>select</code> 的 future 都完成且無法再有更多進展時。這有個不斷循環 <code>select</code> 的小撇步。</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use futures::{future, select};
+
+async fn count() {
+    let mut a_fut = future::ready(4);
+    let mut b_fut = future::ready(6);
+    let mut total = 0;
+
+    loop {
+        select! {
+            a = a_fut =&gt; total += a,
+            b = b_fut =&gt; total += b,
+            complete =&gt; break,
+            default =&gt; unreachable!(), // never runs (futures are ready, then complete)
+        };
+    }
+    assert_eq!(total, 10);
+}
+#}</code></pre></pre>
+<h2><a class="header" href="#與-unpin-及-fusedfuture-的互動" id="與-unpin-及-fusedfuture-的互動">與 <code>Unpin</code> 及 <code>FusedFuture</code> 的互動</a></h2>
+<p>你可能會發現，第一個例子中我們會對兩個 <code>async fn</code> 回傳的 future 呼叫 <code>.fuse()</code>，且用了 <code>pin_mut</code> 來固定它們。這兩個都是必要操作，因為在 <code>select</code> 中的 future 必須實作 <code>Unpin</code> trait 與 <code>FusedFuture</code> trait。</p>
+<p><code>Unpin</code> 必要的原因是用在 <code>select</code> 的 future 不是直接取其值，而是取其可變引用（mutable reference）。由於沒有取走所有權，尚未完成的 future 可以在 <code>select</code> 之後再度使用。</p>
+<p><code>FusedFuturue</code> 列為必須是因為當一個 future 完成時，<code>select</code> 就不該再度輪詢它。<code>FusedFuture</code> 的原理是追蹤其 future 是否已完成。實作了 <code>FusedFuture</code> 使得 <code>select</code> 可以用在迴圈中，只輪詢尚未完成的 future。這可以從上面的範例中看到，<code>a_fut</code> 或 <code>b_fut</code> 將會在第二次迴圈迭代中完成，由於 <code>future::ready</code> 有實作 <code>FusedFuture</code>，所以可以告知 <code>select</code> 不要再輪詢它。</p>
+<p>注意，stream 也有對應的 <code>FusedStream</code> trait。有實作這個 trait 或使用 <code>.fuse()</code> 封裝的 stream，都會從它們的組合子 <code>.next()</code> / <code>.try_next()</code> 產生 <code>FusedFuture</code>。</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use futures::{
+    stream::{Stream, StreamExt, FusedStream},
+    select,
+};
+
+async fn add_two_streams(
+    mut s1: impl Stream&lt;Item = u8&gt; + FusedStream + Unpin,
+    mut s2: impl Stream&lt;Item = u8&gt; + FusedStream + Unpin,
+) -&gt; u8 {
+    let mut total = 0;
+
+    loop {
+        let item = select! {
+            x = s1.next() =&gt; x,
+            x = s2.next() =&gt; x,
+            complete =&gt; break,
+        };
+        if let Some(next_num) = item {
+            total += next_num;
+        }
+    }
+
+    total
+}
+#}</code></pre></pre>
+<h2><a class="header" href="#在-select-迴圈中使用-fuse-與-futuresunordered-的並行任務" id="在-select-迴圈中使用-fuse-與-futuresunordered-的並行任務">在 <code>select</code> 迴圈中使用 <code>Fuse</code> 與 <code>FuturesUnordered</code> 的並行任務</a></h2>
+<p>有個難以發現但很方便的函式是 <code>Fuse::terminated()</code>，它可以建立一個空的且已經終止的 future，並在往後填上實際需要執行的 future。</p>
+<p><code>Fuse::termianted()</code> 在遇到需要在 <code>select</code> 迴圈內執行一個任務，但這任務卻在在該迴圈內才產生的情況，顯得十分方便順手。</p>
+<p>請注意使用 <code>.select_next_some()</code> 函式。這個函式可以與 <code>select</code> 配合，只執行會從 steam 產生 <code>Some(_)</code> 的分支，而忽略產生 <code>None</code> 的分支。</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use futures::{
+    future::{Fuse, FusedFuture, FutureExt},
+    stream::{FusedStream, Stream, StreamExt},
+    pin_mut,
+    select,
+};
+
+async fn get_new_num() -&gt; u8 { /* ... */ 5 }
+
+async fn run_on_new_num(_: u8) { /* ... */ }
+
+async fn run_loop(
+    mut interval_timer: impl Stream&lt;Item = ()&gt; + FusedStream + Unpin,
+    starting_num: u8,
+) {
+    let run_on_new_num_fut = run_on_new_num(starting_num).fuse();
+    let get_new_num_fut = Fuse::terminated();
+    pin_mut!(run_on_new_num_fut, get_new_num_fut);
+    loop {
+        select! {
+            () = interval_timer.select_next_some() =&gt; {
+                // The timer has elapsed. Start a new `get_new_num_fut`
+                // if one was not already running.
+                if get_new_num_fut.is_terminated() {
+                    get_new_num_fut.set(get_new_num().fuse());
+                }
+            },
+            new_num = get_new_num_fut =&gt; {
+                // A new number has arrived-- start a new `run_on_new_num_fut`,
+                // dropping the old one.
+                run_on_new_num_fut.set(run_on_new_num(new_num).fuse());
+            },
+            // Run the `run_on_new_num_fut`
+            () = run_on_new_num_fut =&gt; {},
+            // panic if everything completed, since the `interval_timer` should
+            // keep yielding values indefinitely.
+            complete =&gt; panic!(&quot;`interval_timer` completed unexpectedly&quot;),
+        }
+    }
+}
+#}</code></pre></pre>
+<p>當同一個 future 的多個副本需要同時執行，請使用 <code>FuturesUnordered</code> 型別。接下來的範例和上一個很相似，但會執行每個 <code>run_on_new_num_fut</code> 的副本到其完成，而非當新的產生就中止舊的。它同時會印出 <code>run_on_new_num_fut</code> 的返回值。</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use futures::{
+    future::{Fuse, FusedFuture, FutureExt},
+    stream::{FusedStream, FuturesUnordered, Stream, StreamExt},
+    pin_mut,
+    select,
+};
+
+async fn get_new_num() -&gt; u8 { /* ... */ 5 }
+
+async fn run_on_new_num(_: u8) -&gt; u8 { /* ... */ 5 }
+
+// Runs `run_on_new_num` with the latest number
+// retrieved from `get_new_num`.
+//
+// `get_new_num` is re-run every time a timer elapses,
+// immediately cancelling the currently running
+// `run_on_new_num` and replacing it with the newly
+// returned value.
+async fn run_loop(
+    mut interval_timer: impl Stream&lt;Item = ()&gt; + FusedStream + Unpin,
+    starting_num: u8,
+) {
+    let mut run_on_new_num_futs = FuturesUnordered::new();
+    run_on_new_num_futs.push(run_on_new_num(starting_num));
+    let get_new_num_fut = Fuse::terminated();
+    pin_mut!(get_new_num_fut);
+    loop {
+        select! {
+            () = interval_timer.select_next_some() =&gt; {
+                // The timer has elapsed. Start a new `get_new_num_fut`
+                // if one was not already running.
+                if get_new_num_fut.is_terminated() {
+                    get_new_num_fut.set(get_new_num().fuse());
+                }
+            },
+            new_num = get_new_num_fut =&gt; {
+                // A new number has arrived-- start a new `run_on_new_num_fut`.
+                run_on_new_num_futs.push(run_on_new_num(new_num));
+            },
+            // Run the `run_on_new_num_futs` and check if any have completed
+            res = run_on_new_num_futs.select_next_some() =&gt; {
+                println!(&quot;run_on_new_num_fut returned {:?}&quot;, res);
+            },
+            // panic if everything completed, since the `interval_timer` should
+            // keep yielding values indefinitely.
+            complete =&gt; panic!(&quot;`interval_timer` completed unexpectedly&quot;),
+        }
+    }
+}
+
+#}</code></pre></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../06_multiple_futures/02_join.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../404.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../06_multiple_futures/02_join.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../404.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

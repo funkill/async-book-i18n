@@ -1,0 +1,307 @@
+<!DOCTYPE HTML>
+<html lang="zh-tw" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>async/await - Rust 非同步程式設計</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li><a href="../01_getting_started/01_chapter.html"><strong aria-hidden="true">1.</strong> 開始上手</a></li><li><ol class="section"><li><a href="../01_getting_started/02_why_async.html"><strong aria-hidden="true">1.1.</strong> 為什麼是非同步？</a></li><li><a href="../01_getting_started/03_state_of_async_rust.html"><strong aria-hidden="true">1.2.</strong> 非同步 Rust 的現況</a></li><li><a href="../01_getting_started/04_async_await_primer.html"><strong aria-hidden="true">1.3.</strong> async/.await 入門</a></li><li><a href="../01_getting_started/05_http_server_example.html"><strong aria-hidden="true">1.4.</strong> 案例：HTTP 伺服器</a></li></ol></li><li><a href="../02_execution/01_chapter.html"><strong aria-hidden="true">2.</strong> 揭秘：執行 Future 與任務</a></li><li><ol class="section"><li><a href="../02_execution/02_future.html"><strong aria-hidden="true">2.1.</strong> Future Trait</a></li><li><a href="../02_execution/03_wakeups.html"><strong aria-hidden="true">2.2.</strong> 透過 Waker 喚醒任務</a></li><li><a href="../02_execution/04_executor.html"><strong aria-hidden="true">2.3.</strong> 案例：打造一個執行器</a></li><li><a href="../02_execution/05_io.html"><strong aria-hidden="true">2.4.</strong> 執行器與系統輸入輸出</a></li></ol></li><li><a href="../03_async_await/01_chapter.html" class="active"><strong aria-hidden="true">3.</strong> async/await</a></li><li><a href="../04_pinning/01_chapter.html"><strong aria-hidden="true">4.</strong> Pinning</a></li><li><a href="../05_streams/01_chapter.html"><strong aria-hidden="true">5.</strong> Streams</a></li><li><ol class="section"><li><a href="../05_streams/02_iteration_and_concurrency.html"><strong aria-hidden="true">5.1.</strong> 迭代與並行</a></li></ol></li><li><a href="../06_multiple_futures/01_chapter.html"><strong aria-hidden="true">6.</strong> 同時執行多個 Future</a></li><li><ol class="section"><li><a href="../06_multiple_futures/02_join.html"><strong aria-hidden="true">6.1.</strong> join!</a></li><li><a href="../06_multiple_futures/03_select.html"><strong aria-hidden="true">6.2.</strong> select!</a></li><li><a href="../404.html"><strong aria-hidden="true">6.3.</strong> TODO: 產生 Spawning</a></li><li><a href="../404.html"><strong aria-hidden="true">6.4.</strong> TODO: 取消與逾時</a></li><li><a href="../404.html"><strong aria-hidden="true">6.5.</strong> TODO: FuturesUnordered</a></li></ol></li><li><a href="../404.html"><strong aria-hidden="true">7.</strong> TODO: I/O</a></li><li><ol class="section"><li><a href="../404.html"><strong aria-hidden="true">7.1.</strong> TODO: AsyncRead 與 AsyncWrite</a></li></ol></li><li><a href="../404.html"><strong aria-hidden="true">8.</strong> TODO: 非同步設計模式：解法與建議</a></li><li><ol class="section"><li><a href="../404.html"><strong aria-hidden="true">8.1.</strong> TODO: 打造伺服器與請求/回應模式</a></li><li><a href="../404.html"><strong aria-hidden="true">8.2.</strong> TODO: 共享狀態管理</a></li></ol></li><li><a href="../404.html"><strong aria-hidden="true">9.</strong> TODO: 生態系：Tokio 與更多</a></li><li><ol class="section"><li><a href="../404.html"><strong aria-hidden="true">9.1.</strong> TODO: 還有好多好多？...</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Rust 非同步程式設計</h1>
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#asyncawait" id="asyncawait"><code>async</code>/<code>.await</code></a></h1>
+<p>在<a href="../01_getting_started/04_async_await_primer.html">第一章</a>，我們簡要介紹了 <code>async/.await</code>，並用它簡單架構一個簡易伺服器。本章節將深入探討 <code>async/.await</code> 的細節，解釋其運作原理，並比較 <code>async</code> 程式碼和傳統 Rust 程式的區別。</p>
+<p><code>async</code>/<code>.await</code> 是特殊的 Rust 語法，使其能轉移控制權到當前執行緒，而非阻塞之，並在等待操作完成的同時，允許其他程式碼繼續推進。</p>
+<p>使用 <code>async</code> 有兩個主要途徑：<code>async fn</code> 與 <code>async</code> 區塊（block）。兩者皆返回一個實作 <code>Future</code> trait 的值：</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+
+#fn main() {
+// `foo()` returns a type that implements `Future&lt;Output = u8&gt;`.
+// `foo().await` will result in a value of type `u8`.
+async fn foo() -&gt; u8 { 5 }
+
+fn bar() -&gt; impl Future&lt;Output = u8&gt; {
+    // This `async` block results in a type that implements
+    // `Future&lt;Output = u8&gt;`.
+    async {
+        let x: u8 = foo().await;
+        x + 5
+    }
+}
+#}</code></pre></pre>
+<p>如我們在第一章所見， <code>async</code> 函式主體和其他 future 都具有惰性：在執行前不做任何事。執行一個 <code>Future</code> 最常見的手段是 <code>.await</code> 它。當對一個 <code>Future</code> 呼叫 <code>.await</code> 時，會嘗試執行它到完成。若該 <code>Future</code> 阻塞，將會轉移控制權到當前的執行緒。而執行器會在該 <code>Future</code> 能取得更多進展時恢復執行它，讓 <code>.await</code> 得以解決。</p>
+<h2><a class="header" href="#async-生命週期" id="async-生命週期"><code>async</code> 生命週期</a></h2>
+<p>和其他傳統函式不同， <code>async fn</code> 會取得引用（reference）或其他非 <code>'static</code> 引數（argument），並返回一個綁定這些引數生命週期的 <code>Future</code>。</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+// This function:
+async fn foo(x: &amp;u8) -&gt; u8 { *x }
+
+// Is equivalent to this function:
+fn foo_expanded&lt;'a&gt;(x: &amp;'a u8) -&gt; impl Future&lt;Output = u8&gt; + 'a {
+    async move { *x }
+}
+#}</code></pre></pre>
+<p>這代表了從 <code>async fn</code> 返回的 future 只能在其非 <code>'-static</code> 引數的有效生命週期內被 <code>await</code>。</p>
+<p>在常見的例子像在呼叫函式（如 <code>foo(&amp;x).await</code>）立刻 <code>await</code> 該 future，這並不構成問題。不過，如果想保存或將這個 future 傳送到其他任務或執行緒中，這可能會發生問題。</p>
+<p>常見將一個引用作為引數的 <code>async fn</code> 轉換為回傳一個 <code>'static</code> future 的方法是，將呼叫 <code>async fn</code> 需要的引數包裹在一個 <code>async</code> 區塊裡：</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+fn bad() -&gt; impl Future&lt;Output = u8&gt; {
+    let x = 5;
+    borrow_x(&amp;x) // ERROR: `x` does not live long enough
+}
+
+fn good() -&gt; impl Future&lt;Output = u8&gt; {
+    async {
+        let x = 5;
+        borrow_x(&amp;x).await
+    }
+}
+#}</code></pre></pre>
+<p>透過將引數移動到該 <code>async</code> 區塊，我們延長了引數的生命週期，使其匹配 <code>foo</code> 回傳的 <code>Future</code>。</p>
+<h2><a class="header" href="#async-move" id="async-move"><code>async move</code></a></h2>
+<p><code>async</code> 區塊（block） 與閉包（closure）可以使用 <code>move</code> 關鍵字，行為更類似一般的閉包。一個 <code>async move</code> block 會取得它引用到的變數之所有權，這些變數就可以活過（outlive）當前的作用範圍（scope），但也就得與放棄其他程式碼共享這些變數的好處。</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+/// `async` block:
+///
+/// Multiple different `async` blocks can access the same local variable
+/// so long as they're executed within the variable's scope
+async fn blocks() {
+    let my_string = &quot;foo&quot;.to_string();
+
+    let future_one = async {
+        // ...
+        println!(&quot;{}&quot;, my_string);
+    };
+
+    let future_two = async {
+        // ...
+        println!(&quot;{}&quot;, my_string);
+    };
+
+    // Run both futures to completion, printing &quot;foo&quot; twice:
+    let ((), ()) = futures::join!(future_one, future_two);
+}
+
+/// `async move` block:
+///
+/// Only one `async move` block can access the same captured variable, since
+/// captures are moved into the `Future` generated by the `async move` block.
+/// However, this allows the `Future` to outlive the original scope of the
+/// variable:
+fn move_block() -&gt; impl Future&lt;Output = ()&gt; {
+    let my_string = &quot;foo&quot;.to_string();
+    async move {
+        // ...
+        println!(&quot;{}&quot;, my_string);
+    }
+}
+#}</code></pre></pre>
+<h2><a class="header" href="#在多執行緒的執行器上-await" id="在多執行緒的執行器上-await">在多執行緒的執行器上 <code>.await</code></a></h2>
+<p>請注意，當使用多執行緒的 <code>Future</code> 執行器時，因為 <code>.await</code> 可能導致環境切換至新執行緒，讓 <code>Future</code> 可能在不同執行緒間移動，所以任何用在 <code>async</code> 裡的變數都必須能在執行緒間傳輸。</p>
+<p>這代表使用 <code>Rc</code>、<code>&amp;RefCell</code> 或其他沒有實作 <code>Send</code> trait 的型別，包含沒實作 <code>Sync</code> trait 引用型別，都不安全。</p>
+<p>（警告：只要不在呼叫 <code>.await</code> 的作用域裡，這些型別還是可以使用）</p>
+<p>同樣地，在 <code>.await</code> 之間持有傳統非 future 的鎖不是個好主意，它可能會造成執行緒池（threadpool）完全鎖上：一個任務拿走了鎖，並且 <code>.await</code> 將控制權轉移至執行器，讓其他任務嘗試取得鎖，然後就造成死鎖（deadlock）。我們可以使用 <code>futures::lock</code> 而不是 <code>std::sync</code> 中的 <code>Mutex</code> 從而避免這件事。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../02_execution/05_io.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../04_pinning/01_chapter.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../02_execution/05_io.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../04_pinning/01_chapter.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

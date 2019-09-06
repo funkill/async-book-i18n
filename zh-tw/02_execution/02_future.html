@@ -1,0 +1,355 @@
+<!DOCTYPE HTML>
+<html lang="zh-tw" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Future Trait - Rust 非同步程式設計</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li><a href="../01_getting_started/01_chapter.html"><strong aria-hidden="true">1.</strong> 開始上手</a></li><li><ol class="section"><li><a href="../01_getting_started/02_why_async.html"><strong aria-hidden="true">1.1.</strong> 為什麼是非同步？</a></li><li><a href="../01_getting_started/03_state_of_async_rust.html"><strong aria-hidden="true">1.2.</strong> 非同步 Rust 的現況</a></li><li><a href="../01_getting_started/04_async_await_primer.html"><strong aria-hidden="true">1.3.</strong> async/.await 入門</a></li><li><a href="../01_getting_started/05_http_server_example.html"><strong aria-hidden="true">1.4.</strong> 案例：HTTP 伺服器</a></li></ol></li><li><a href="../02_execution/01_chapter.html"><strong aria-hidden="true">2.</strong> 揭秘：執行 Future 與任務</a></li><li><ol class="section"><li><a href="../02_execution/02_future.html" class="active"><strong aria-hidden="true">2.1.</strong> Future Trait</a></li><li><a href="../02_execution/03_wakeups.html"><strong aria-hidden="true">2.2.</strong> 透過 Waker 喚醒任務</a></li><li><a href="../02_execution/04_executor.html"><strong aria-hidden="true">2.3.</strong> 案例：打造一個執行器</a></li><li><a href="../02_execution/05_io.html"><strong aria-hidden="true">2.4.</strong> 執行器與系統輸入輸出</a></li></ol></li><li><a href="../03_async_await/01_chapter.html"><strong aria-hidden="true">3.</strong> async/await</a></li><li><a href="../04_pinning/01_chapter.html"><strong aria-hidden="true">4.</strong> Pinning</a></li><li><a href="../05_streams/01_chapter.html"><strong aria-hidden="true">5.</strong> Streams</a></li><li><ol class="section"><li><a href="../05_streams/02_iteration_and_concurrency.html"><strong aria-hidden="true">5.1.</strong> 迭代與並行</a></li></ol></li><li><a href="../06_multiple_futures/01_chapter.html"><strong aria-hidden="true">6.</strong> 同時執行多個 Future</a></li><li><ol class="section"><li><a href="../06_multiple_futures/02_join.html"><strong aria-hidden="true">6.1.</strong> join!</a></li><li><a href="../06_multiple_futures/03_select.html"><strong aria-hidden="true">6.2.</strong> select!</a></li><li><a href="../404.html"><strong aria-hidden="true">6.3.</strong> TODO: 產生 Spawning</a></li><li><a href="../404.html"><strong aria-hidden="true">6.4.</strong> TODO: 取消與逾時</a></li><li><a href="../404.html"><strong aria-hidden="true">6.5.</strong> TODO: FuturesUnordered</a></li></ol></li><li><a href="../404.html"><strong aria-hidden="true">7.</strong> TODO: I/O</a></li><li><ol class="section"><li><a href="../404.html"><strong aria-hidden="true">7.1.</strong> TODO: AsyncRead 與 AsyncWrite</a></li></ol></li><li><a href="../404.html"><strong aria-hidden="true">8.</strong> TODO: 非同步設計模式：解法與建議</a></li><li><ol class="section"><li><a href="../404.html"><strong aria-hidden="true">8.1.</strong> TODO: 打造伺服器與請求/回應模式</a></li><li><a href="../404.html"><strong aria-hidden="true">8.2.</strong> TODO: 共享狀態管理</a></li></ol></li><li><a href="../404.html"><strong aria-hidden="true">9.</strong> TODO: 生態系：Tokio 與更多</a></li><li><ol class="section"><li><a href="../404.html"><strong aria-hidden="true">9.1.</strong> TODO: 還有好多好多？...</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Rust 非同步程式設計</h1>
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#future-trait" id="future-trait"><code>Future</code> Trait</a></h1>
+<p><code>Future</code> trait 在 Rust 非同步程式設計中扮演關鍵角色。一個 <code>Future</code> 就是一個非同步的運算，產出一個結果值（雖然這個值可能為空，例如 <code>()</code>）。一個<em>簡化</em>版的 future trait 看起來如下：</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+trait SimpleFuture {
+    type Output;
+    fn poll(&amp;mut self, wake: fn()) -&gt; Poll&lt;Self::Output&gt;;
+}
+
+enum Poll&lt;T&gt; {
+    Ready(T),
+    Pending,
+}
+#}</code></pre></pre>
+<p>Future 可以透過呼叫 <code>poll</code> 函式往前推進，這個函式會盡可能地驅使 future 邁向完成。若 future 完成了，就回傳 <code>Poll::Ready(reuslt)</code>。若這個 future 尚無法完成，就回傳 <code>Poll::Pending</code>，並安排在該 <code>Future</code> 就緒且能有所進展時來呼叫 <code>wake()</code> 函式。當呼叫了 <code>wake()</code>，執行器（executor）會驅使 <code>Future</code> 再次呼叫 <code>poll</code>，於是 <code>Future</code> 就可以取得更多進展。</p>
+<p>若沒有 <code>wake()</code>，執行器不會知道哪個 future 能有所進展，因此必須不斷輪詢所有 future。有了 <code>wake()</code>，執行器能夠確切知道哪個 future 已準備好接受輪詢。</p>
+<p>舉例來說，試想我們要從 socket 讀取一些可能尚未就緒的資料。如果有資料進來，我們則可以讀取它並回傳 <code>Poll:Ready(data)</code>；但若沒有任何資料就緒，我們的 future 會被阻塞且無法取得任何進展。當沒有任何資料，我們必須註冊 <code>wake</code> 函式，並在 socket 上的資料就緒時呼叫它，進而告知執行器我們的 future 準備好取得進展了。一個簡單的 <code>SocketRead</code> future 大致上類似這樣：</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub struct SocketRead&lt;'a&gt; {
+    socket: &amp;'a Socket,
+}
+
+impl SimpleFuture for SocketRead&lt;'_&gt; {
+    type Output = Vec&lt;u8&gt;;
+
+    fn poll(&amp;mut self, wake: fn()) -&gt; Poll&lt;Self::Output&gt; {
+        if self.socket.has_data_to_read() {
+            // The socket has data-- read it into a buffer and return it.
+            Poll::Ready(self.socket.read_buf())
+        } else {
+            // The socket does not yet have data.
+            //
+            // Arrange for `wake` to be called once data is available.
+            // When data becomes available, `wake` will be called, and the
+            // user of this `Future` will know to call `poll` again and
+            // receive data.
+            self.socket.set_readable_callback(wake);
+            Poll::Pending
+        }
+    }
+}
+#}</code></pre></pre>
+<p>這個 <code>Future</code> 原型可以在不需要中間配置（intermediate allocation）下組合多個非同步操作。並可以經由免配置狀態機（allocation-free state machine）實作同時執行多個 future 或是串聯多個 future 的操作，示例如下：</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+/// A SimpleFuture that runs two other futures to completion concurrently.
+///
+/// Concurrency is achieved via the fact that calls to `poll` each future
+/// may be interleaved, allowing each future to advance itself at its own pace.
+pub struct Join&lt;FutureA, FutureB&gt; {
+    // Each field may contain a future that should be run to completion.
+    // If the future has already completed, the field is set to `None`.
+    // This prevents us from polling a future after it has completed, which
+    // would violate the contract of the `Future` trait.
+    a: Option&lt;FutureA&gt;,
+    b: Option&lt;FutureB&gt;,
+}
+
+impl&lt;FutureA, FutureB&gt; SimpleFuture for Join&lt;FutureA, FutureB&gt;
+where
+    FutureA: SimpleFuture&lt;Output = ()&gt;,
+    FutureB: SimpleFuture&lt;Output = ()&gt;,
+{
+    type Output = ();
+    fn poll(&amp;mut self, wake: fn()) -&gt; Poll&lt;Self::Output&gt; {
+        // Attempt to complete future `a`.
+        if let Some(a) = &amp;mut self.a {
+            if let Poll::Ready(()) = a.poll(wake) {
+                self.a.take();
+            }
+        }
+
+        // Attempt to complete future `b`.
+        if let Some(b) = &amp;mut self.b {
+            if let Poll::Ready(()) = b.poll(wake) {
+                self.b.take();
+            }
+        }
+
+        if self.a.is_none() &amp;&amp; self.b.is_none() {
+            // Both futures have completed-- we can return successfully
+            Poll::Ready(())
+        } else {
+            // One or both futures returned `Poll::Pending` and still have
+            // work to do. They will call `wake()` when progress can be made.
+            Poll::Pending
+        }
+    }
+}
+#}</code></pre></pre>
+<p>這展示了多個 future 如何在無需分別配置資源的情形下同時執行，讓我們能夠寫出更高效的非同步程式。無獨有偶，多個循序的 future 也能一個接著一個執行，如下所示：</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+/// A SimpleFuture that runs two futures to completion, one after another.
+//
+// Note: for the purposes of this simple example, `AndThenFut` assumes both
+// the first and second futures are available at creation-time. The real
+// `AndThen` combinator allows creating the second future based on the output
+// of the first future, like `get_breakfast.and_then(|food| eat(food))`.
+pub struct AndThenFut&lt;FutureA, FutureB&gt; {
+    first: Option&lt;FutureA&gt;,
+    second: FutureB,
+}
+
+impl&lt;FutureA, FutureB&gt; SimpleFuture for AndThenFut&lt;FutureA, FutureB&gt;
+where
+    FutureA: SimpleFuture&lt;Output = ()&gt;,
+    FutureB: SimpleFuture&lt;Output = ()&gt;,
+{
+    type Output = ();
+    fn poll(&amp;mut self, wake: fn()) -&gt; Poll&lt;Self::Output&gt; {
+        if let Some(first) = &amp;mut self.first {
+            match first.poll(wake) {
+                // We've completed the first future-- remove it and start on
+                // the second!
+                Poll::Ready(()) =&gt; self.first.take(),
+                // We couldn't yet complete the first future.
+                Poll::Pending =&gt; return Poll::Pending,
+            };
+        }
+        // Now that the first future is done, attempt to complete the second.
+        self.second.poll(wake)
+    }
+}
+#}</code></pre></pre>
+<p>這些示例展現出 <code>Future</code> 可以在無需額外配置的物件與深度巢狀回呼 （nested callback）的情形下，清晰表達出非同步的流程控制。看完這樣基本的流程控制，讓我們來討論真正的 <code>Future</code> trait 和剛剛的原型哪裡不相同。</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+trait Future {
+    type Output;
+    fn poll(
+        // Note the change from `&amp;mut self` to `Pin&lt;&amp;mut Self&gt;`:
+        self: Pin&lt;&amp;mut Self&gt;,
+        // and the change from `wake: fn()` to `cx: &amp;mut Context&lt;'_&gt;`:
+        cx: &amp;mut Context&lt;'_&gt;,
+    ) -&gt; Poll&lt;Self::Output&gt;;
+}
+#}</code></pre></pre>
+<p>你會發現的第一個改變是 <code>self</code> 型別不再是 <code>&amp;mut self</code>，而是由 <code>Pin&lt;&amp;mut self&gt;</code> 取代。我們會在<a href="../04_pinning/01_chapter.html">往後的章節</a>有更多關於 Pinning 討論，此刻知道它允許我們建立一個不移動（immovable）的 future。不移動物件可在它們的欄位（field）保存指標，例如 <code>struct MyFut { a: i32, ptr_to_a: *const i32 }</code>。Pinning 是啟用 async/await 前必要之功能。</p>
+<p>第二，<code>wake: fn()</code> 改為 <code>&amp;mut Context&lt;_&gt;</code>。在 <code>SimpleFuture</code> 我們透過呼叫一個函式指標（<code>fn()</code>）來告知 future 執行器這個 future 可以接受輪詢。然而，由於 <code>fn()</code> 是 zero-sized，它不能儲存任何有關<em>哪個</em> <code>Future</code> 呼叫了 <code>wake</code> 的資訊。</p>
+<p>在真實世界場景下，一個複雜如網頁伺服器的應用程式可能有數以千計不同的連線，這些連線的喚醒函式需要妥善分別管理。<code>Context</code> 型別提供取得一個叫 <code>Waker</code> 的型別來解決此問題，<code>Waker</code> 的功能則是用來喚醒一個特定任務。</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../02_execution/01_chapter.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../02_execution/03_wakeups.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../02_execution/01_chapter.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../02_execution/03_wakeups.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

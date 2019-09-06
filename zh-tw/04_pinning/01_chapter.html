@@ -1,0 +1,311 @@
+<!DOCTYPE HTML>
+<html lang="zh-tw" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Pinning - Rust 非同步程式設計</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li><a href="../01_getting_started/01_chapter.html"><strong aria-hidden="true">1.</strong> 開始上手</a></li><li><ol class="section"><li><a href="../01_getting_started/02_why_async.html"><strong aria-hidden="true">1.1.</strong> 為什麼是非同步？</a></li><li><a href="../01_getting_started/03_state_of_async_rust.html"><strong aria-hidden="true">1.2.</strong> 非同步 Rust 的現況</a></li><li><a href="../01_getting_started/04_async_await_primer.html"><strong aria-hidden="true">1.3.</strong> async/.await 入門</a></li><li><a href="../01_getting_started/05_http_server_example.html"><strong aria-hidden="true">1.4.</strong> 案例：HTTP 伺服器</a></li></ol></li><li><a href="../02_execution/01_chapter.html"><strong aria-hidden="true">2.</strong> 揭秘：執行 Future 與任務</a></li><li><ol class="section"><li><a href="../02_execution/02_future.html"><strong aria-hidden="true">2.1.</strong> Future Trait</a></li><li><a href="../02_execution/03_wakeups.html"><strong aria-hidden="true">2.2.</strong> 透過 Waker 喚醒任務</a></li><li><a href="../02_execution/04_executor.html"><strong aria-hidden="true">2.3.</strong> 案例：打造一個執行器</a></li><li><a href="../02_execution/05_io.html"><strong aria-hidden="true">2.4.</strong> 執行器與系統輸入輸出</a></li></ol></li><li><a href="../03_async_await/01_chapter.html"><strong aria-hidden="true">3.</strong> async/await</a></li><li><a href="../04_pinning/01_chapter.html" class="active"><strong aria-hidden="true">4.</strong> Pinning</a></li><li><a href="../05_streams/01_chapter.html"><strong aria-hidden="true">5.</strong> Streams</a></li><li><ol class="section"><li><a href="../05_streams/02_iteration_and_concurrency.html"><strong aria-hidden="true">5.1.</strong> 迭代與並行</a></li></ol></li><li><a href="../06_multiple_futures/01_chapter.html"><strong aria-hidden="true">6.</strong> 同時執行多個 Future</a></li><li><ol class="section"><li><a href="../06_multiple_futures/02_join.html"><strong aria-hidden="true">6.1.</strong> join!</a></li><li><a href="../06_multiple_futures/03_select.html"><strong aria-hidden="true">6.2.</strong> select!</a></li><li><a href="../404.html"><strong aria-hidden="true">6.3.</strong> TODO: 產生 Spawning</a></li><li><a href="../404.html"><strong aria-hidden="true">6.4.</strong> TODO: 取消與逾時</a></li><li><a href="../404.html"><strong aria-hidden="true">6.5.</strong> TODO: FuturesUnordered</a></li></ol></li><li><a href="../404.html"><strong aria-hidden="true">7.</strong> TODO: I/O</a></li><li><ol class="section"><li><a href="../404.html"><strong aria-hidden="true">7.1.</strong> TODO: AsyncRead 與 AsyncWrite</a></li></ol></li><li><a href="../404.html"><strong aria-hidden="true">8.</strong> TODO: 非同步設計模式：解法與建議</a></li><li><ol class="section"><li><a href="../404.html"><strong aria-hidden="true">8.1.</strong> TODO: 打造伺服器與請求/回應模式</a></li><li><a href="../404.html"><strong aria-hidden="true">8.2.</strong> TODO: 共享狀態管理</a></li></ol></li><li><a href="../404.html"><strong aria-hidden="true">9.</strong> TODO: 生態系：Tokio 與更多</a></li><li><ol class="section"><li><a href="../404.html"><strong aria-hidden="true">9.1.</strong> TODO: 還有好多好多？...</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Rust 非同步程式設計</h1>
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#pinning" id="pinning">Pinning</a></h1>
+<p>想要輪詢 future 前，必須先用一個特殊的型別 <code>Pin&lt;T&gt;</code> 固定住 future。如果你閱讀了前一節 <a href="../02_execution/01_chapter.html">揭秘：執行 <code>Future</code> 與任務</a>對 <a href="../02_execution/02_future.html"><code>Future</code> trait</a> 的解釋，你會在 <code>Future:poll</code> 方法的定義上 <code>self: Pin&lt;&amp;mut Self&gt;</code> 認出 <code>Pin</code>，但它到底代表什麼，為什麼需要它？</p>
+<h2><a class="header" href="#為什麼要-pinning" id="為什麼要-pinning">為什麼要 Pinning</a></h2>
+<p>Pinning 達成了確保一個物件永遠不移動。我們需要憶起 <code>async/.await</code> 的運作原理，才能理解為什麼需要釘住一個物件。試想以下的程式碼：</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+let fut_one = ...;
+let fut_two = ...;
+async move {
+    fut_one.await;
+    fut_two.await;
+}
+#}</code></pre></pre>
+<p>神秘面紗之下，其實建立了一個實作了 <code>Future</code> 的匿名型別，它的 <code>poll</code> 方法如下：</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+// The `Future` type generated by our `async { ... }` block
+struct AsyncFuture {
+    fut_one: FutOne,
+    fut_two: FutTwo,
+    state: State,
+}
+
+// List of states our `async` block can be in
+enum State {
+    AwaitingFutOne,
+    AwaitingFutTwo,
+    Done,
+}
+
+impl Future for AsyncFuture {
+    fn poll(self: Pin&lt;&amp;mut Self&gt;, cx: &amp;mut Context&lt;'_&gt;) -&gt; Poll&lt;()&gt; {
+        loop {
+            match self.state {
+                State::AwaitingFutOne =&gt; match self.fut_one.poll(..) {
+                    Poll::Ready(()) =&gt; self.state = State::AwaitingFutTwo,
+                    Poll::Pending =&gt; return Poll::Pending,
+                }
+                State::AwaitingFutTwo =&gt; match self.fut_two.poll(..) {
+                    Poll::Ready(()) =&gt; self.state = State::Done,
+                    Poll::Pending =&gt; return Poll::Pending,
+                }
+                State::Done =&gt; return Poll::Ready(()),
+            }
+        }
+    }
+}
+#}</code></pre></pre>
+<p>第一次呼叫 <code>poll</code> 時，會輪詢 <code>fut_one</code>。若 <code>fut_one</code> 不能完成，<code>AsyncFuture::poll</code> 會直接返回。接下來的 Future 的 <code>poll</code> 呼叫則從前一次結束的地方繼續執行。這個過程會持續到整個 future 有辦法成功完成。</p>
+<p>不過，如果 async 區塊（block）使用到引用（reference）會如何？舉例來說：</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+async {
+    let mut x = [0; 128];
+    let read_into_buf_fut = read_into_buf(&amp;mut x);
+    read_into_buf_fut.await;
+    println!(&quot;{:?}&quot;, x);
+}
+#}</code></pre></pre>
+<p>這會編譯成怎樣的結構體（struct）呢？</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+struct ReadIntoBuf&lt;'a&gt; {
+    buf: &amp;'a mut [u8], // points to `x` below
+}
+
+struct AsyncFuture {
+    x: [u8; 128],
+    read_into_buf_fut: ReadIntoBuf&lt;'what_lifetime?&gt;,
+}
+#}</code></pre></pre>
+<p>這裡，<code>ReadIntoBuf</code> future 持有一個指向其他結構體 <code>x</code> 的引用。但是，若 <code>AsyncFuture</code> 移動了（moved），<code>x</code> 的記憶體位址也會隨之移動，並讓儲存在 <code>read_into_buf_fut.buf</code> 的指標失效。</p>
+<p>將 future 固定在一個特定的記憶體位址可以避免這種問題發生，讓在 <code>async</code> 區塊裡建立值的引用更安全。</p>
+<h2><a class="header" href="#如何使用-pinning" id="如何使用-pinning">如何使用 Pinning</a></h2>
+<p><code>Pin</code> 型別封裝了指標型別，保證這些在指標背後的值不被移動。例如 <code>Pin&lt;&amp; mut&gt;</code>、<code>Pin&lt;&amp;t&gt;</code>、<code>Pin&lt;Box&lt;T&gt;&gt;</code> 全都保證 <code>T</code> 不被移動。</p>
+<p>大多數的型別不會有移不移動的問題。這些型別實作了 <code>Unpin</code> trait。指向 <code>Unpin</code> 型別的指標可任意移入 <code>Pin</code> 或從 <code>Pin</code> 取出。舉例來說，<code>u8</code> 是 <code>Unpin</code> 的，因此 <code>Pin&lt;&amp;mut T&gt;</code> 會表現得像普通的 <code>&amp;mut T</code>。</p>
+<p>有些與 future 互動的函式會要求 future 必須為 <code>Unpin</code>。若想要在要求 <code>Unpin</code> 型別的函式使用一個非 <code>Unpin</code> 的 <code>Future</code> 或 <code>Stream</code>，你要先透過 <code>Box::pin</code>（可建立 <code>Pin&lt;Box&lt;T&gt;&gt;</code>）或 <code>pin_utils::pin_mut!</code> （可建立 <code>Pin&lt;&amp;mut T&gt;</code>）來固定住（pin）這個值。<code>Pin&lt;Box&lt;Fut&gt;&gt;</code> 與 <code>Pin&lt;&amp;mut Fut&gt;</code> 就都能作為 future 使用，且都實作了 <code>Unpin</code>。</p>
+<p>以下是範例：</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use pin_utils::pin_mut; // `pin_utils` is a handy crate available on crates.io
+
+// A function which takes a `Future` that implements `Unpin`.
+fn execute_unpin_future(x: impl Future&lt;Output = ()&gt; + Unpin) { ... }
+
+let fut = async { ... };
+execute_unpin_future(fut); // Error: `fut` does not implement `Unpin` trait
+
+// Pinning with `Box`:
+let fut = async { ... };
+let fut = Box::pin(fut);
+execute_unpin_future(fut); // OK
+
+// Pinning with `pin_mut!`:
+let fut = async { ... };
+pin_mut!(fut);
+execute_unpin_future(fut); // OK
+#}</code></pre></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../03_async_await/01_chapter.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../05_streams/01_chapter.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../03_async_await/01_chapter.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../05_streams/01_chapter.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

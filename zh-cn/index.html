@@ -1,0 +1,213 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Rust异步编程: 你需要知道的事 - Asynchronous Programming in Rust</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="affix"><a href="async-in-rust/chapter.html">Rust异步编程: 你需要知道的事</a></li><li><a href="crash-course/chapter.html"><strong aria-hidden="true">1.</strong> 暂时没有东西的教程</a></li><li><ol class="section"><li><a href="crash-course/hello.html"><strong aria-hidden="true">1.1.</strong> Hello, world!</a></li><li><a href="crash-course/files.html"><strong aria-hidden="true">1.2.</strong> 文件服务</a></li><li><a href="crash-course/caching.html"><strong aria-hidden="true">1.3.</strong> 添加缓存</a></li><li><a href="crash-course/streaming.html"><strong aria-hidden="true">1.4.</strong> 添加流(Add Streaming)</a></li></ol></li><li><a href="task-model/chapter.html"><strong aria-hidden="true">2.</strong> 任务与执行器</a></li><li><ol class="section"><li><a href="task-model/intro.html"><strong aria-hidden="true">2.1.</strong> 背景: 同步 vs. 异步</a></li><li><a href="task-model/tasks.html"><strong aria-hidden="true">2.2.</strong> 通过任务掌握异步编程</a></li><li><a href="task-model/exec.html"><strong aria-hidden="true">2.3.</strong> 玩具版任务执行器</a></li><li><a href="task-model/events.html"><strong aria-hidden="true">2.4.</strong> 玩具版事件循环</a></li><li><a href="task-model/finish.html"><strong aria-hidden="true">2.5.</strong> 整合任务执行器与事件循环</a></li><li><a href="task-model/real/section.html"><strong aria-hidden="true">2.6.</strong> 实用任务系统</a></li><li><ol class="section"><li><a href="task-model/real/tasks.html"><strong aria-hidden="true">2.6.1.</strong> 任务</a></li><li><a href="task-model/real/exec.html"><strong aria-hidden="true">2.6.2.</strong> 执行器</a></li><li><a href="task-model/real/events.html"><strong aria-hidden="true">2.6.3.</strong> 时间循环</a></li></ol></li></ol></li><li><a href="tokio/chapter.html"><strong aria-hidden="true">3.</strong> 异步I/O</a></li><li><ol class="section"><li><a href="tokio/socket.html"><strong aria-hidden="true">3.1.</strong> 获取套接字(sockets)</a></li><li><a href="tokio/io.html"><strong aria-hidden="true">3.2.</strong> 读写</a></li><li><a href="tokio/transform.html"><strong aria-hidden="true">3.3.</strong> 在字节层级转换</a></li><li><a href="tokio/shutdown.html"><strong aria-hidden="true">3.4.</strong> 关闭连接</a></li></ol></li><li><a href="futures/chapter.html"><strong aria-hidden="true">4.</strong> Futures</a></li><li><ol class="section"><li><a href="futures/def.html"><strong aria-hidden="true">4.1.</strong> 核心概念</a></li><li><a href="futures/read-exact.html"><strong aria-hidden="true">4.2.</strong> 示例: ReadExact</a></li><li><a href="futures/timeout.html"><strong aria-hidden="true">4.3.</strong> 示例: 超时包装器</a></li><li><a href="futures/pull.html"><strong aria-hidden="true">4.4.</strong> 推送及拉取: future与任务</a></li><li><a href="futures/combinators.html"><strong aria-hidden="true">4.5.</strong> 组合子</a></li><li><a href="futures/cancellation.html"><strong aria-hidden="true">4.6.</strong> 任务取消</a></li><li><a href="futures/sync.html"><strong aria-hidden="true">4.7.</strong> 关联同步与异步代码</a></li><li><a href="rpc-client/chapter.html"><strong aria-hidden="true">4.8.</strong> 示例: RPC客户端</a></li></ol></li><li><a href="streams/chapter.html"><strong aria-hidden="true">5.</strong> 流(Streams)</a></li><li><ol class="section"><li><a href="streams/def.html"><strong aria-hidden="true">5.1.</strong> 核心概念</a></li><li><a href="streams/combinators.html"><strong aria-hidden="true">5.2.</strong> 组合子</a></li><li><a href="streams/lines.html"><strong aria-hidden="true">5.3.</strong> 示例: 分行流</a></li></ol></li><li><a href="sinks/chapter.html"><strong aria-hidden="true">6.</strong> Sinks</a></li><li><ol class="section"><li><a href="sinks/def.html"><strong aria-hidden="true">6.1.</strong> 核心概念</a></li><li><a href="sinks/combinators.html"><strong aria-hidden="true">6.2.</strong> 组合子</a></li><li><a href="sinks/buffering.html"><strong aria-hidden="true">6.3.</strong> 示例: 写入缓存</a></li></ol></li><li><a href="simple-chat/chapter.html"><strong aria-hidden="true">7.</strong> 案例学习: 聊天服务器</a></li><li><a href="transports/chapter.html"><strong aria-hidden="true">8.</strong> 转换(Transports)</a></li><li><ol class="section"><li><a href="transports/framing.html"><strong aria-hidden="true">8.1.</strong> 分帧(Framing)</a></li><li><a href="transports/decoding.html"><strong aria-hidden="true">8.2.</strong> 解码</a></li><li><a href="transports/encoding.html"><strong aria-hidden="true">8.3.</strong> 编码</a></li><li><a href="simple-http/chapter.html"><strong aria-hidden="true">8.4.</strong> 示例: http服务器</a></li><li><a href="transports/length.html"><strong aria-hidden="true">8.5.</strong> 定长分帧</a></li><li><a href="transports/layers.html"><strong aria-hidden="true">8.6.</strong> 转换层</a></li></ol></li><li><a href="async-in-practice/chapter.html"><strong aria-hidden="true">9.</strong> 异步编程实践</a></li><li><ol class="section"><li><a href="async-in-practice/effective.html"><strong aria-hidden="true">9.1.</strong> 用futures高效编程</a></li><li><ol class="section"><li><a href="async-in-practice/concurrency.html"><strong aria-hidden="true">9.1.1.</strong> 多线程化</a></li><li><a href="async-in-practice/cominators.html"><strong aria-hidden="true">9.1.2.</strong> 使用组合子的时机</a></li><li><a href="api-client/chapter.html"><strong aria-hidden="true">9.1.3.</strong> 示例: Github API客户端</a></li><li><a href="async-in-practice/buffering.html"><strong aria-hidden="true">9.1.4.</strong> 缓存与bytes</a></li></ol></li><li><a href="async-in-practice/organizing.html"><strong aria-hidden="true">9.2.</strong> 组织代码</a></li><li><ol class="section"><li><a href="async-in-practice/libs.html"><strong aria-hidden="true">9.2.1.</strong> 写库指南</a></li><li><a href="async-in-practice/resources.html"><strong aria-hidden="true">9.2.2.</strong> 资源管理</a></li><li><a href="async-in-practice/tasks.html"><strong aria-hidden="true">9.2.3.</strong> 任务结构化</a></li><li><a href="async-in-practice/shutdown.html"><strong aria-hidden="true">9.2.4.</strong> 安全退出</a></li><li><a href="async-in-practice/backpressure.html"><strong aria-hidden="true">9.2.5.</strong> 背压(Backpressure)</a></li></ol></li></ol></li><li><a href="batteries/chapter.html"><strong aria-hidden="true">10.</strong> 功能齐备的async</a></li><li><ol class="section"><li><a href="batteries/networking/chapter.html"><strong aria-hidden="true">10.1.</strong> 网络</a></li><li><ol class="section"><li><a href="batteries/networking/http.html"><strong aria-hidden="true">10.1.1.</strong> HTTP</a></li><li><a href="batteries/networking/dns.html"><strong aria-hidden="true">10.1.2.</strong> DNS</a></li><li><a href="batteries/networking/tls.html"><strong aria-hidden="true">10.1.3.</strong> TLS</a></li><li><a href="batteries/networking/websockets.html"><strong aria-hidden="true">10.1.4.</strong> Webscokets</a></li><li><a href="batteries/networking/gzip.html"><strong aria-hidden="true">10.1.5.</strong> Gzip</a></li><li><a href="batteries/networking/udp.html"><strong aria-hidden="true">10.1.6.</strong> UDP</a></li></ol></li><li><a href="batteries/services/chapter.html"><strong aria-hidden="true">10.2.</strong> 服务</a></li><li><ol class="section"><li><a href="batteries/services/databases.html"><strong aria-hidden="true">10.2.1.</strong> 数据库</a></li><li><a href="batteries/services/timers.html"><strong aria-hidden="true">10.2.2.</strong> 定时器</a></li><li><a href="batteries/services/files.html"><strong aria-hidden="true">10.2.3.</strong> 文件I/O</a></li><li><a href="batteries/services/processes.html"><strong aria-hidden="true">10.2.4.</strong> 进程</a></li><li><a href="batteries/services/named-pipes.html"><strong aria-hidden="true">10.2.5.</strong> 命名管流</a></li><li><a href="batteries/services/signals.html"><strong aria-hidden="true">10.2.6.</strong> 信号量</a></li><li><a href="batteries/services/inotify.html"><strong aria-hidden="true">10.2.7.</strong> inotify</a></li></ol></li></ol></li><li><a href="advanced/chapter.html"><strong aria-hidden="true">11.</strong> 高级话题</a></li><li><ol class="section"><li><a href="advanced/tokio.html"><strong aria-hidden="true">11.1.</strong> 管理Tokio时间循环</a></li><li><a href="advanced/exec.html"><strong aria-hidden="true">11.2.</strong> 构建定制执行器</a></li></ol></li><li><a href="faq/chapter.html"><strong aria-hidden="true">12.</strong> FAQ</a></li><li><ol class="section"><li><a href="faq/langs.html"><strong aria-hidden="true">12.1.</strong> 与其他语言的对比</a></li><li><a href="faq/pull.html"><strong aria-hidden="true">12.2.</strong> &quot;拉取&quot;模型的合理性</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Asynchronous Programming in Rust</h1>
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#rust异步编程-你需要知道的事" id="rust异步编程-你需要知道的事">Rust异步编程: 你需要知道的事</a></h1>
+<p>异步编程的魅力之处在于两点:</p>
+<p>首先, 它能让你<strong>事半功倍</strong>. 你能够用单单一个操作系统层面的线程来处理任意数量的同步交互; 一个单线程异步服务器能够扩展处理规模到数百万的连接.</p>
+<p>时下, 一些操作系统让你可以用 <em>相对</em> 较小的代价同时使用很大数量的操作系统线程, 但开销仍在那. 而这引出了异步编程的第二个好处: <strong>通过使&quot;任务&quot;基本没有开销,  表达能力更强的编程模式能够被运用</strong>, 而这些模式在同步编程中难以实践.</p>
+<p>简而言之, 异步程序的效率提升十分显著, 让我们解锁了强而有力的新编程风格.</p>
+<p>那么, 有被忽略的问题吗?</p>
+<p>线程是操作系统层面的一等公民, 但如果你想在同一个线程中同时处理不同活动, 那就要完全靠你自己实现. 幸运的是, Rust富有表达力, 我们能构建共享的, 零开销的抽象, 而这让&quot;任务级&quot;编程也成了一等概念</p>
+<p>也就是说, Rust编程语言的同步编程与异步编程有着重要的区别--尤其在stable Rust里. 这本书的目的部分在于帮助指导你了解这些区别, 并教会你一系列高效的异步编程模式</p>
+<p>最后, 要牢记除了高伸缩性服务器意外, 传统的同步编程也可以很高效. 特别的, Rust在内存跟踪与预测的优势意味着比起使用其他语言, 你可以在同步服务上走的更远. 考虑你的应用能否在更简单的同步模型中提供更好的服务, 和其他的架构决策一样重要.</p>
+<h2><a class="header" href="#rust异步编程的现状及展望" id="rust异步编程的现状及展望">Rust异步编程的现状及展望</a></h2>
+<p>有了<code>futures</code>和<code>tokio</code>包(crate), <strong>Rust为异步编程打下了坚实的基础</strong>. 这两个包分别涵盖了异步的核心概念, 以及异步I/O的基本元素. 在这些包之上, 形成了与各种协议和服务交互的生态, 例如HTTP, SSL, DNS, WebSockets. 这本书将覆盖这个生态的争夺内容, 推荐各个方面中生产级的库.</p>
+<p>还有, <strong>利用<code>async/await</code>注解提高工效性的工作在进行当中.</strong> 这些工作只在nightly Rust当中进行, 并期望在未来提供更加灵活的借用支持. 不过, 如果你愿意使用nighlty Rust工作, 这个库本身是稳定并且有帮助工作的. 这本书也会涵盖这个库的用法.</p>
+<p>短期内可以预见, 有很多简单的方式去联系同步及异步代码. 长远来看, 当异步变成这门语言的更加重要的部分时, 核心库可能会重写为异步版本, 但更加容易被同步或异步代码运用. 我们也会在这本书中看到示例.</p>
+<h2><a class="header" href="#目标读者群" id="目标读者群">目标读者群</a></h2>
+<p>这本书旨在作为完整, 及时更新的讲述Rust异步理念的指南, 适合新老手:</p>
+<ul>
+<li>前面章节将简单介绍异步编程的概念, 以及Rust在完善这方面的行动</li>
+<li>中间章节将提供更加强大的工具, 最佳实践, 以及更大型的示例, 以助你在使用异步时更加严谨</li>
+<li>后面的章节涵盖更广泛的异步生态以及核心库的最先进的特性, 还有更深入的案例学习.</li>
+</ul>
+<p><em>让我们深入了解吧!</em></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

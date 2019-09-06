@@ -1,0 +1,341 @@
+<!DOCTYPE HTML>
+<html lang="ru" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Исполнители и системный ввод/вывод - Асинхронное программирование на Rust</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li><a href="../01_getting_started/01_chapter.html"><strong aria-hidden="true">1.</strong> Начало работы</a></li><li><ol class="section"><li><a href="../01_getting_started/02_why_async.html"><strong aria-hidden="true">1.1.</strong> Для чего нужна асинхронность?</a></li><li><a href="../01_getting_started/03_state_of_async_rust.html"><strong aria-hidden="true">1.2.</strong> Состояние асинхронности в Rust</a></li><li><a href="../01_getting_started/04_async_await_primer.html"><strong aria-hidden="true">1.3.</strong> Пример async/.await</a></li><li><a href="../01_getting_started/05_http_server_example.html"><strong aria-hidden="true">1.4.</strong> Применение: HTTP сервер</a></li></ol></li><li><a href="../02_execution/01_chapter.html"><strong aria-hidden="true">2.</strong> Под капотом: выполнение Future и задач</a></li><li><ol class="section"><li><a href="../02_execution/02_future.html"><strong aria-hidden="true">2.1.</strong> Типаж Future</a></li><li><a href="../02_execution/03_wakeups.html"><strong aria-hidden="true">2.2.</strong> Вызовы задачи при помощи Waker</a></li><li><a href="../02_execution/04_executor.html"><strong aria-hidden="true">2.3.</strong> Применение: создание исполнителя</a></li><li><a href="../02_execution/05_io.html" class="active"><strong aria-hidden="true">2.4.</strong> Исполнители и системный ввод/вывод</a></li></ol></li><li><a href="../03_async_await/01_chapter.html"><strong aria-hidden="true">3.</strong> async/await</a></li><li><a href="../04_pinning/01_chapter.html"><strong aria-hidden="true">4.</strong> Закрепление (pinning)</a></li><li><a href="../05_streams/01_chapter.html"><strong aria-hidden="true">5.</strong> Потоки</a></li><li><ol class="section"><li><a href="../05_streams/02_iteration_and_concurrency.html"><strong aria-hidden="true">5.1.</strong> Итерирование и параллелизм</a></li></ol></li><li><a href="../06_multiple_futures/01_chapter.html"><strong aria-hidden="true">6.</strong> Одновременное выполнение нескольких Future </a></li><li><ol class="section"><li><a href="../06_multiple_futures/02_join.html"><strong aria-hidden="true">6.1.</strong> join!</a></li><li><a href="../06_multiple_futures/03_select.html"><strong aria-hidden="true">6.2.</strong> select!</a></li><li><a href="../404.html"><strong aria-hidden="true">6.3.</strong> TODO: Порождение</a></li><li><a href="../404.html"><strong aria-hidden="true">6.4.</strong> TODO: Отмена и таймауты</a></li><li><a href="../404.html"><strong aria-hidden="true">6.5.</strong> TODO: FuturesUnordered</a></li></ol></li><li><a href="../404.html"><strong aria-hidden="true">7.</strong> TODO: Ввод/вывод</a></li><li><ol class="section"><li><a href="../404.html"><strong aria-hidden="true">7.1.</strong> TODO: AsyncRead и AsyncWrite</a></li></ol></li><li><a href="../404.html"><strong aria-hidden="true">8.</strong> TODO: Паттерны асинхронного дизайна: решения и предложения</a></li><li><ol class="section"><li><a href="../404.html"><strong aria-hidden="true">8.1.</strong> TODO: Моделирование серверов и паттерн Request/Response</a></li><li><a href="../404.html"><strong aria-hidden="true">8.2.</strong> TODO: Управление общим состоянием</a></li></ol></li><li><a href="../404.html"><strong aria-hidden="true">9.</strong> TODO: Экосистема: Tokio и другие</a></li><li><ol class="section"><li><a href="../404.html"><strong aria-hidden="true">9.1.</strong> TODO: Много, много больше?...</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Асинхронное программирование на Rust</h1>
+
+                        <div class="right-buttons">
+                            <a href="../print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#Исполнители-и-системный-вводвывод" id="Исполнители-и-системный-вводвывод">Исполнители и системный ввод/вывод</a></h1>
+<p>В главе <a href="./02_future.html">&quot;Типаж <code>Future</code>&quot;</a>, мы обсуждали такой 
+пример <code>future</code>, которая выполняет асинхронное чтение сокета:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+pub struct SocketRead&lt;'a&gt; {
+    socket: &amp;'a Socket,
+}
+
+impl SimpleFuture for SocketRead&lt;'_&gt; {
+    type Output = Vec&lt;u8&gt;;
+
+    fn poll(&amp;mut self, wake: fn()) -&gt; Poll&lt;Self::Output&gt; {
+        if self.socket.has_data_to_read() {
+            // The socket has data-- read it into a buffer and return it.
+            Poll::Ready(self.socket.read_buf())
+        } else {
+            // The socket does not yet have data.
+            //
+            // Arrange for `wake` to be called once data is available.
+            // When data becomes available, `wake` will be called, and the
+            // user of this `Future` will know to call `poll` again and
+            // receive data.
+            self.socket.set_readable_callback(wake);
+            Poll::Pending
+        }
+    }
+}
+#}</code></pre></pre>
+<p>Эта <code>future</code> читает доступные данные из сокета и если доступных 
+данных нет, то она будет передана исполнителю с запросом 
+активирования задачи, если сокет снова станет читаемым. Однако, 
+из текущего примера не ясна реализация типа 
+<code>Socket</code> и, в частности, не совсем очевидно как 
+работает функция <code>set_readable_callback</code>. Как мы 
+можем сделать так, чтобы <code>lw.wake()</code> был вызван, 
+когда сокет станет читаемым? Один из вариантов - иметь поток, 
+который постоянно проверяет стал ли <code>socket</code> 
+читаемым, вызывая при необходимости метод 
+<code>wake()</code>. Тем не менее, такой подход будет весьма не 
+эффективным, так как он требует отдельного потока для каждой 
+блокирующей IO <code>future</code>. Это значительно снизит эффективность 
+нашего асинхронного кода.</p>
+<p>На практике эта проблема решается при помощи интеграции с 
+IO - зависимыми системными блокирующими примитивами такими, 
+как <code>epoll</code> в Linux, <code>kqueue</code> во FreeBSD и
+Mac OS, <code>IOCP</code> в Windows и <code>port</code> в Fuchsia (все они 
+предоставляются при помощи кроссплатформенного Rust-пакета 
+<a href="https://github.com/tokio-rs/mio"><code>mio</code></a>). Все эти примитивы позволяют потоку 
+заблокироваться с несколькими асинхронными IO-событиями, 
+возвращая одно из завершённых событий. На практике эти API 
+выглядят примерно так:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+struct IoBlocker {
+    ...
+}
+
+struct Event {
+    // ID уникально идентифицирующее событие, которое уже произошло и на которое мы подписались.
+    id: usize,
+
+    // Набор сигналов для ожидания или которые произошли.
+    signals: Signals,
+}
+
+impl IoBlocker {
+    /// Создаём новую коллекцию асинхронных IO-событий для блокировки.
+    fn new() -&gt; Self { ... }
+
+    /// Проявим интерес к определённому IO-событию.
+    fn add_io_event_interest(
+        &amp;self,
+
+        /// Объект, на котором происходит событие
+        io_object: &amp;IoObject,
+
+        /// Набор сигналов, которые могут применяться к `io_object`,
+        /// для которых должно быть инициировано событие, в паре с
+        /// ID, которые передадутся событиям, получившимся в результате нашего интереса.
+        event: Event,
+    ) { ... }
+
+    /// Заблокируется до появления одного из событий.
+    fn block(&amp;self) -&gt; Event { ... }
+}
+
+let mut io_blocker = IoBlocker::new();
+io_blocker.add_io_event_interest(
+    &amp;socket_1,
+    Event { id: 1, signals: READABLE },
+);
+io_blocker.add_io_event_interest(
+    &amp;socket_2,
+    Event { id: 2, signals: READABLE | WRITABLE },
+);
+let event = io_blocker.block();
+
+// выведет что-то похожее на &quot;Socket 1 is now READABLE&quot;, если сокет станет доступным для чтения.
+println!(&quot;Socket {:?} is now {:?}&quot;, event.id, event.signals);
+#}</code></pre></pre>
+<p>Исполнители <code>Future</code> могут использовать эти примитивы для предоставления асинхронных объектов ввода-вывода,
+таких как сокеты, которые могут настроить обратные вызовы для запуска при определённом событии ввода-вывода. В случае нашего примера <code>SocketRead</code> выше,
+<code>Socket::set_readable_callback</code> функция может выглядеть следующим псевдокодом:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+impl Socket {
+    fn set_readable_callback(&amp;self, waker: Waker) {
+        // `local_executor` это ссылка на локальный исполнитель.
+        // это может быть предусмотрено при создании сокета, 
+        // большинство реализаций исполнителей делают это через локальный поток, так удобнее.
+        let local_executor = self.local_executor;
+
+        // Уникальный ID для объекта ввода вывода.
+        let id = self.id;
+
+        // Сохраним `waker` в данных исполнителя,
+        // чтобы его можно было вызвать после того как будет получено событие.
+        local_executor.event_map.insert(id, waker);
+        local_executor.add_io_event_interest(
+            &amp;self.socket_file_descriptor,
+            Event { id, signals: READABLE },
+        );
+    }
+}
+#}</code></pre></pre>
+<p>Теперь у нас может быть только один поток исполнителя, который может принимать и отправлять любые
+события ввода-вывода в соответствующий <code>Waker</code>, который разбудит соответствующую
+задачу, позволяющая исполнителю довести больше задач до завершения перед возвратом,
+чтобы проверить больше событий ввода-вывода (и цикл продолжается...).</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../02_execution/04_executor.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../03_async_await/01_chapter.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="../02_execution/04_executor.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="../03_async_await/01_chapter.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

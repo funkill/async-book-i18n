@@ -1,0 +1,1267 @@
+<!DOCTYPE HTML>
+<html lang="zh-cn" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Asynchronous Programming in Rust</title>
+        
+        <meta name="robots" content="noindex" />
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="affix"><a href="async-in-rust/chapter.html">Rust异步编程: 你需要知道的事</a></li><li><a href="crash-course/chapter.html"><strong aria-hidden="true">1.</strong> 暂时没有东西的教程</a></li><li><ol class="section"><li><a href="crash-course/hello.html"><strong aria-hidden="true">1.1.</strong> Hello, world!</a></li><li><a href="crash-course/files.html"><strong aria-hidden="true">1.2.</strong> 文件服务</a></li><li><a href="crash-course/caching.html"><strong aria-hidden="true">1.3.</strong> 添加缓存</a></li><li><a href="crash-course/streaming.html"><strong aria-hidden="true">1.4.</strong> 添加流(Add Streaming)</a></li></ol></li><li><a href="task-model/chapter.html"><strong aria-hidden="true">2.</strong> 任务与执行器</a></li><li><ol class="section"><li><a href="task-model/intro.html"><strong aria-hidden="true">2.1.</strong> 背景: 同步 vs. 异步</a></li><li><a href="task-model/tasks.html"><strong aria-hidden="true">2.2.</strong> 通过任务掌握异步编程</a></li><li><a href="task-model/exec.html"><strong aria-hidden="true">2.3.</strong> 玩具版任务执行器</a></li><li><a href="task-model/events.html"><strong aria-hidden="true">2.4.</strong> 玩具版事件循环</a></li><li><a href="task-model/finish.html"><strong aria-hidden="true">2.5.</strong> 整合任务执行器与事件循环</a></li><li><a href="task-model/real/section.html"><strong aria-hidden="true">2.6.</strong> 实用任务系统</a></li><li><ol class="section"><li><a href="task-model/real/tasks.html"><strong aria-hidden="true">2.6.1.</strong> 任务</a></li><li><a href="task-model/real/exec.html"><strong aria-hidden="true">2.6.2.</strong> 执行器</a></li><li><a href="task-model/real/events.html"><strong aria-hidden="true">2.6.3.</strong> 时间循环</a></li></ol></li></ol></li><li><a href="tokio/chapter.html"><strong aria-hidden="true">3.</strong> 异步I/O</a></li><li><ol class="section"><li><a href="tokio/socket.html"><strong aria-hidden="true">3.1.</strong> 获取套接字(sockets)</a></li><li><a href="tokio/io.html"><strong aria-hidden="true">3.2.</strong> 读写</a></li><li><a href="tokio/transform.html"><strong aria-hidden="true">3.3.</strong> 在字节层级转换</a></li><li><a href="tokio/shutdown.html"><strong aria-hidden="true">3.4.</strong> 关闭连接</a></li></ol></li><li><a href="futures/chapter.html"><strong aria-hidden="true">4.</strong> Futures</a></li><li><ol class="section"><li><a href="futures/def.html"><strong aria-hidden="true">4.1.</strong> 核心概念</a></li><li><a href="futures/read-exact.html"><strong aria-hidden="true">4.2.</strong> 示例: ReadExact</a></li><li><a href="futures/timeout.html"><strong aria-hidden="true">4.3.</strong> 示例: 超时包装器</a></li><li><a href="futures/pull.html"><strong aria-hidden="true">4.4.</strong> 推送及拉取: future与任务</a></li><li><a href="futures/combinators.html"><strong aria-hidden="true">4.5.</strong> 组合子</a></li><li><a href="futures/cancellation.html"><strong aria-hidden="true">4.6.</strong> 任务取消</a></li><li><a href="futures/sync.html"><strong aria-hidden="true">4.7.</strong> 关联同步与异步代码</a></li><li><a href="rpc-client/chapter.html"><strong aria-hidden="true">4.8.</strong> 示例: RPC客户端</a></li></ol></li><li><a href="streams/chapter.html"><strong aria-hidden="true">5.</strong> 流(Streams)</a></li><li><ol class="section"><li><a href="streams/def.html"><strong aria-hidden="true">5.1.</strong> 核心概念</a></li><li><a href="streams/combinators.html"><strong aria-hidden="true">5.2.</strong> 组合子</a></li><li><a href="streams/lines.html"><strong aria-hidden="true">5.3.</strong> 示例: 分行流</a></li></ol></li><li><a href="sinks/chapter.html"><strong aria-hidden="true">6.</strong> Sinks</a></li><li><ol class="section"><li><a href="sinks/def.html"><strong aria-hidden="true">6.1.</strong> 核心概念</a></li><li><a href="sinks/combinators.html"><strong aria-hidden="true">6.2.</strong> 组合子</a></li><li><a href="sinks/buffering.html"><strong aria-hidden="true">6.3.</strong> 示例: 写入缓存</a></li></ol></li><li><a href="simple-chat/chapter.html"><strong aria-hidden="true">7.</strong> 案例学习: 聊天服务器</a></li><li><a href="transports/chapter.html"><strong aria-hidden="true">8.</strong> 转换(Transports)</a></li><li><ol class="section"><li><a href="transports/framing.html"><strong aria-hidden="true">8.1.</strong> 分帧(Framing)</a></li><li><a href="transports/decoding.html"><strong aria-hidden="true">8.2.</strong> 解码</a></li><li><a href="transports/encoding.html"><strong aria-hidden="true">8.3.</strong> 编码</a></li><li><a href="simple-http/chapter.html"><strong aria-hidden="true">8.4.</strong> 示例: http服务器</a></li><li><a href="transports/length.html"><strong aria-hidden="true">8.5.</strong> 定长分帧</a></li><li><a href="transports/layers.html"><strong aria-hidden="true">8.6.</strong> 转换层</a></li></ol></li><li><a href="async-in-practice/chapter.html"><strong aria-hidden="true">9.</strong> 异步编程实践</a></li><li><ol class="section"><li><a href="async-in-practice/effective.html"><strong aria-hidden="true">9.1.</strong> 用futures高效编程</a></li><li><ol class="section"><li><a href="async-in-practice/concurrency.html"><strong aria-hidden="true">9.1.1.</strong> 多线程化</a></li><li><a href="async-in-practice/cominators.html"><strong aria-hidden="true">9.1.2.</strong> 使用组合子的时机</a></li><li><a href="api-client/chapter.html"><strong aria-hidden="true">9.1.3.</strong> 示例: Github API客户端</a></li><li><a href="async-in-practice/buffering.html"><strong aria-hidden="true">9.1.4.</strong> 缓存与bytes</a></li></ol></li><li><a href="async-in-practice/organizing.html"><strong aria-hidden="true">9.2.</strong> 组织代码</a></li><li><ol class="section"><li><a href="async-in-practice/libs.html"><strong aria-hidden="true">9.2.1.</strong> 写库指南</a></li><li><a href="async-in-practice/resources.html"><strong aria-hidden="true">9.2.2.</strong> 资源管理</a></li><li><a href="async-in-practice/tasks.html"><strong aria-hidden="true">9.2.3.</strong> 任务结构化</a></li><li><a href="async-in-practice/shutdown.html"><strong aria-hidden="true">9.2.4.</strong> 安全退出</a></li><li><a href="async-in-practice/backpressure.html"><strong aria-hidden="true">9.2.5.</strong> 背压(Backpressure)</a></li></ol></li></ol></li><li><a href="batteries/chapter.html"><strong aria-hidden="true">10.</strong> 功能齐备的async</a></li><li><ol class="section"><li><a href="batteries/networking/chapter.html"><strong aria-hidden="true">10.1.</strong> 网络</a></li><li><ol class="section"><li><a href="batteries/networking/http.html"><strong aria-hidden="true">10.1.1.</strong> HTTP</a></li><li><a href="batteries/networking/dns.html"><strong aria-hidden="true">10.1.2.</strong> DNS</a></li><li><a href="batteries/networking/tls.html"><strong aria-hidden="true">10.1.3.</strong> TLS</a></li><li><a href="batteries/networking/websockets.html"><strong aria-hidden="true">10.1.4.</strong> Webscokets</a></li><li><a href="batteries/networking/gzip.html"><strong aria-hidden="true">10.1.5.</strong> Gzip</a></li><li><a href="batteries/networking/udp.html"><strong aria-hidden="true">10.1.6.</strong> UDP</a></li></ol></li><li><a href="batteries/services/chapter.html"><strong aria-hidden="true">10.2.</strong> 服务</a></li><li><ol class="section"><li><a href="batteries/services/databases.html"><strong aria-hidden="true">10.2.1.</strong> 数据库</a></li><li><a href="batteries/services/timers.html"><strong aria-hidden="true">10.2.2.</strong> 定时器</a></li><li><a href="batteries/services/files.html"><strong aria-hidden="true">10.2.3.</strong> 文件I/O</a></li><li><a href="batteries/services/processes.html"><strong aria-hidden="true">10.2.4.</strong> 进程</a></li><li><a href="batteries/services/named-pipes.html"><strong aria-hidden="true">10.2.5.</strong> 命名管流</a></li><li><a href="batteries/services/signals.html"><strong aria-hidden="true">10.2.6.</strong> 信号量</a></li><li><a href="batteries/services/inotify.html"><strong aria-hidden="true">10.2.7.</strong> inotify</a></li></ol></li></ol></li><li><a href="advanced/chapter.html"><strong aria-hidden="true">11.</strong> 高级话题</a></li><li><ol class="section"><li><a href="advanced/tokio.html"><strong aria-hidden="true">11.1.</strong> 管理Tokio时间循环</a></li><li><a href="advanced/exec.html"><strong aria-hidden="true">11.2.</strong> 构建定制执行器</a></li></ol></li><li><a href="faq/chapter.html"><strong aria-hidden="true">12.</strong> FAQ</a></li><li><ol class="section"><li><a href="faq/langs.html"><strong aria-hidden="true">12.1.</strong> 与其他语言的对比</a></li><li><a href="faq/pull.html"><strong aria-hidden="true">12.2.</strong> &quot;拉取&quot;模型的合理性</a></li></ol></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">Asynchronous Programming in Rust</h1>
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#rust异步编程-你需要知道的事" id="rust异步编程-你需要知道的事">Rust异步编程: 你需要知道的事</a></h1>
+<p>异步编程的魅力之处在于两点:</p>
+<p>首先, 它能让你<strong>事半功倍</strong>. 你能够用单单一个操作系统层面的线程来处理任意数量的同步交互; 一个单线程异步服务器能够扩展处理规模到数百万的连接.</p>
+<p>时下, 一些操作系统让你可以用 <em>相对</em> 较小的代价同时使用很大数量的操作系统线程, 但开销仍在那. 而这引出了异步编程的第二个好处: <strong>通过使&quot;任务&quot;基本没有开销,  表达能力更强的编程模式能够被运用</strong>, 而这些模式在同步编程中难以实践.</p>
+<p>简而言之, 异步程序的效率提升十分显著, 让我们解锁了强而有力的新编程风格.</p>
+<p>那么, 有被忽略的问题吗?</p>
+<p>线程是操作系统层面的一等公民, 但如果你想在同一个线程中同时处理不同活动, 那就要完全靠你自己实现. 幸运的是, Rust富有表达力, 我们能构建共享的, 零开销的抽象, 而这让&quot;任务级&quot;编程也成了一等概念</p>
+<p>也就是说, Rust编程语言的同步编程与异步编程有着重要的区别--尤其在stable Rust里. 这本书的目的部分在于帮助指导你了解这些区别, 并教会你一系列高效的异步编程模式</p>
+<p>最后, 要牢记除了高伸缩性服务器意外, 传统的同步编程也可以很高效. 特别的, Rust在内存跟踪与预测的优势意味着比起使用其他语言, 你可以在同步服务上走的更远. 考虑你的应用能否在更简单的同步模型中提供更好的服务, 和其他的架构决策一样重要.</p>
+<h2><a class="header" href="#rust异步编程的现状及展望" id="rust异步编程的现状及展望">Rust异步编程的现状及展望</a></h2>
+<p>有了<code>futures</code>和<code>tokio</code>包(crate), <strong>Rust为异步编程打下了坚实的基础</strong>. 这两个包分别涵盖了异步的核心概念, 以及异步I/O的基本元素. 在这些包之上, 形成了与各种协议和服务交互的生态, 例如HTTP, SSL, DNS, WebSockets. 这本书将覆盖这个生态的争夺内容, 推荐各个方面中生产级的库.</p>
+<p>还有, <strong>利用<code>async/await</code>注解提高工效性的工作在进行当中.</strong> 这些工作只在nightly Rust当中进行, 并期望在未来提供更加灵活的借用支持. 不过, 如果你愿意使用nighlty Rust工作, 这个库本身是稳定并且有帮助工作的. 这本书也会涵盖这个库的用法.</p>
+<p>短期内可以预见, 有很多简单的方式去联系同步及异步代码. 长远来看, 当异步变成这门语言的更加重要的部分时, 核心库可能会重写为异步版本, 但更加容易被同步或异步代码运用. 我们也会在这本书中看到示例.</p>
+<h2><a class="header" href="#目标读者群" id="目标读者群">目标读者群</a></h2>
+<p>这本书旨在作为完整, 及时更新的讲述Rust异步理念的指南, 适合新老手:</p>
+<ul>
+<li>前面章节将简单介绍异步编程的概念, 以及Rust在完善这方面的行动</li>
+<li>中间章节将提供更加强大的工具, 最佳实践, 以及更大型的示例, 以助你在使用异步时更加严谨</li>
+<li>后面的章节涵盖更广泛的异步生态以及核心库的最先进的特性, 还有更深入的案例学习.</li>
+</ul>
+<p><em>让我们深入了解吧!</em></p>
+<h1><a class="header" href="#a-crash-course" id="a-crash-course">A crash course</a></h1>
+<p>Show how to build a simple web app using Hyper and</p>
+<ul>
+<li>Hyper</li>
+<li></li>
+</ul>
+<h1><a class="header" href="#hello-world" id="hello-world">Hello, world!</a></h1>
+<h1><a class="header" href="#serving-files" id="serving-files">Serving files</a></h1>
+<h1><a class="header" href="#adding-caching" id="adding-caching">Adding caching</a></h1>
+<h1><a class="header" href="#adding-streaming" id="adding-streaming">Adding streaming</a></h1>
+<blockquote>
+<p><a href="https://github.com/aturon/apr/blob/ffb00140a767d6e7a4a8875bf6965d10f830a271/src/task-model/chapter.md">task-model/chapter.md</a>
+commit ffb00140a767d6e7a4a8875bf6965d10f830a271</p>
+</blockquote>
+<h1><a class="header" href="#任务与执行器" id="任务与执行器">任务与执行器</a></h1>
+<p>为了用Rust高效地写异步代码, 你需要了解它的基础: 任务模型. 幸运的是, 该模块仅由
+几个简单的模块组成.</p>
+<p>本章将深层介绍任务概念, 然后阐释怎样通过构建能可工作的任务执行器和
+事件循环, 以及整合它们来让系统运行起来.</p>
+<h1><a class="header" href="#背景-同步-vs-异步" id="背景-同步-vs-异步">背景: 同步 vs. 异步</a></h1>
+<p>通过对比同步编程来理解异步编程是最容易的方法, 所以我们先来看一个简单的同步示例:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+// reads 4096 bytes into `my_vec`
+socket.read_exact(&amp;mut my_vec[..4096]);
+#}</code></pre></pre>
+<p>这里的代码使用标准库的<a href="https://static.rust-lang.org/doc/master/std/io/trait.Read.html#method.read_exact"><code>read_exact</code></a>来从<code>socket</code>读取字节流. 让我们看看对应文档: </p>
+<blockquote>
+<p>Read the exact number of bytes required to fill the given buffer.
+&quot;读取恰好数量的字节, 并填充给定的缓存.&quot;</p>
+</blockquote>
+<p>所以, 如果这个方法成功地返回, 我们能保证<code>my_vec</code>已经被填充, 也就是我们从<code>socket</code>
+读取了4k字节. 太棒了! </p>
+<p>但如果数据暂时还没有准备好呢? 如果数据还没从这个套接字(socket)那边传过来呢?</p>
+<p><strong>为了满足填充好缓存的保证,  <code>read_exact</code>方法必须<em>等待</em>. 这也是术语&quot;同步&quot;的
+来源: <code>read_exact</code>是和所需数据的可用性同步的.</strong></p>
+<p>更准确的说, <code>read_exact</code>阻塞了调用它的线程, 意味着该线程不能进一步执行, 直到
+接收到需要的数据. 问题在于, 线程总体来说是一个太重量级的资源而不应该被浪费.
+而且, 当一个线程被阻塞了, 它一直在做无用功; 所有的动作都发生在操作系统层面, 直到
+数据可用, 并疏通了该线程.</p>
+<p>放开来讲, 如果我们想要处理一堆连接, 而我们在用类似<code>read_exact</code>那样会阻塞线程的
+方法, 那我们就需要给每个连接分配单独一个线程; 否则, 连接的处理会被阻塞以等待
+另外的连接的活动完成. 就算我们能够协调连接的活动时间的分配, 线程的开销仍然会限制
+系统的可伸缩性.</p>
+<h2><a class="header" href="#异步" id="异步">异步</a></h2>
+<p>为了达到更好的可伸缩性, 我们需要避免在等待资源释放的时候线程会被阻塞. 绝大部分的
+操作系统提供一个&quot;非阻塞&quot;(或者叫<em>异步</em>)模式来和像套接字的对象进行交互. 在这个
+模式里, 不能马上就绪(ready)的操作会返回一个错误, 然后允许你在当前线程继续做其他
+工作.</p>
+<p><em>人工</em>地通过这种方式和资源打交道是相当痛苦的. 你可以指出如何在单线程中处理这些
+&quot;正在进行中&quot;的操作, 然而大多数情况下, 这些操作来自于完全独立的不同活动(例如两个
+分离的连接).</p>
+<p>幸运的是, Rust提供了一种实现异步编程的方法, 这种方法<em>感觉上</em>像在使用多线程, 但
+底层则是异步访问资源, 并且自动地为你糅合正在进行中的操作. 这方法的核心的概念就是
+<em>任务</em>, 你可以把它当做是能够自动映射到更少数量的操作系统线程的&quot;轻量级线程&quot;
+(类似于<a href="https://tour.golang.org/concurrency/1">goroutines</a>)</p>
+<p>让我们来了解任务模型是怎样工作的吧!</p>
+<blockquote>
+<p><a href="https://github.com/aturon/apr/blob/ffb00140a767d6e7a4a8875bf6965d10f830a271/src/task-model/tasks.md">task-model/tasks.md</a>
+commit ffb00140a767d6e7a4a8875bf6965d10f830a271</p>
+</blockquote>
+<h1><a class="header" href="#通过任务task掌握异步编程" id="通过任务task掌握异步编程">通过任务(task)掌握异步编程</a></h1>
+<p>Rust 通过<em>任务</em>提供异步性, 任务是:</p>
+<ul>
+<li>能够单独运行的工作碎块(也就是可以并发处理), 比较像是OS线程.</li>
+<li>轻量级的, 这样就不需要一整个OS线程. 取而代之的是OS线程可以整合任意数量的独立
+任务, 也就是我们常说的&quot;M:N 线程&quot;, 或&quot;用户空间线程&quot;</li>
+</ul>
+<p><strong>关键的想法(idea)是,  如果一个任务可能<a href="task-model/task-model/intro.html">阻塞</a>线程以等待
+外部事件发生, 那么它马上返还控制权给执行器线程, 执行器能够马上处理其他任务.</strong></p>
+<p>为了知道这些想法是如何实现的, 在这个章节的教程里, 我们会用<code>futures</code>包来构建一个
+<em>玩具</em>版的任务模型和执行器. 在本章的最后, 我们会将这些玩具与更加巧妙的抽象方式
+联系起来, 并将其应用到真实的系统当中.</p>
+<p>我们从定义一个简单的任务trait开始. 一个任务包含一些(很可能正在进行)的工作, 你
+可以告诉任务尝试去调用<code>poll</code>方法来完成工作:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+/// An independent, non-blocking computation
+trait ToyTask {
+    /// Attempt to finish executing the task, returning `Async::Pending`
+    /// if the task needs to wait for an event before it can complete.
+    fn poll(&amp;mut self, wake: &amp;Waker) -&gt; Async&lt;()&gt;;
+}
+#}</code></pre></pre>
+<p>该任务会在那时尽可能地完成工作, 但是它也可以遇到了需要等待事件发生, 例如套接字中
+可用的数据. 这时候任务不应该阻塞线程, 而是返回<code>Async::Pending</code>:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+enum Async&lt;T&gt; {
+    /// Work completed with a result of type `T`.
+    Ready(T),
+
+    /// Work was blocked, and the task is set to be woken when ready
+    /// to continue.
+    Pending,
+}
+#}</code></pre></pre>
+<p>任务<em>返回</em>而不是阻塞给了底层线程去做其他有用的工作的机会(例如调用<em>不同</em>任务的
+<code>poll</code>方法). 但是我们怎么只要什么时候要再尝试调用原本任务的<code>poll</code>方法呢?</p>
+<p>如果你回过头看<code>ToyTask::poll</code>方法, 你会发现有个参数<code>waker</code>. 这个值是waker类型的
+一个实例, 提供了唤醒任务的方法:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+#[derive(Clone)]
+struct Waker { .. }
+
+impl Waker {
+    /// Signals that the associated task is ready to be `poll`ed again.
+    pub fn wake(&amp;self) { ... }
+}
+#}</code></pre></pre>
+<p>所以**无论什么时候你执行了一个任务, 你同时也会给他一个用于以后唤醒该
+任务的句柄 (handle).**如果这个任务因为他在等待套接字上的数据而无法被处理, 它可以
+把<code>waker</code>句柄告诉给套接字, 那么当数据可用的时候, <code>waker</code>就会被调用.</p>
+<p>The Waker type is essentially just a trait object for the Wake trait, which
+allows different executors to use different wakeup strategies:
+Waker类型实际上是Wake trait的trait对象, 允许不同的执行器执行不同的唤醒策略:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+trait Wake: Send + Sync {
+    /// Signals that the associated task is ready to be `poll`ed again.;
+    fn wake(arced: &amp;Arc&lt;Self&gt;)
+}
+
+impl&lt;T: Wake + 'static&gt; From&lt;Arc&lt;T&gt;&gt; for Waker {
+    fn from(wake: Arc&lt;T&gt;) -&gt; Waker { ... }
+}
+#}</code></pre></pre>
+<p>不过这有点抽象. 我们再具体过一遍整个故事吧, 也就是在本章我们要构建:</p>
+<ul>
+<li>一个可以在单个OS线程上跑任意数量的任务的简单<em>任务执行器</em></li>
+<li>一个能够基于定时事件唤醒任务的简单<em>定时时间循环</em></li>
+<li>一个会将上面两者整合在一起的简单的实例</li>
+</ul>
+<p>只要你理解了这些机制, 你就建立了理解这本书其他内容的基础.</p>
+<blockquote>
+<p><a href="https://github.com/aturon/apr/blob/ffb00140a767d6e7a4a8875bf6965d10f830a271/src/task-model/exec.md">task-model/exec.md</a>
+commit ffb00140a767d6e7a4a8875bf6965d10f830a271</p>
+</blockquote>
+<h1><a class="header" href="#一个玩具任务执行器" id="一个玩具任务执行器">一个玩具任务执行器</a></h1>
+<p>来造一个任务执行器吧! 我们的目标是使任意数量的任务能够协调运行在<em>单个</em>OS线程上
+成为可能. 为了保持示例简单, 我们挑选了最原始的数据结构来实现. 以下是我们需要
+导入的数据结构:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+use std::mem;
+use std::collections::{HashMap, HashSet};
+use std::sync::{Arc, Mutex, MutexGuard};
+use std::thread::{self, Thread};
+#}</code></pre></pre>
+<p>首先, 我们定义一个保持执行器状态的结构. 该执行器拥有任务本身, 并分配 给每个任务
+一个<code>usize</code>ID, 使得我们能够从外部指向这些任务. 特殊的, 执行器保持一个<code>ready</code>
+集合, 存储应该要被唤醒的任务id(因为这些任务在等待的事件已经发生了):</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+// the internal executor state
+struct ExecState {
+    // The next available task ID.
+    next_id: usize,
+
+    // The complete list of tasks, keyed by ID.
+    tasks: HashMap&lt;usize, TaskEntry&gt;,
+
+    // The set of IDs for ready-to-run tasks.
+    ready: HashSet&lt;usize&gt;,
+
+    // The actual OS thread running the executor.
+    thread: Thread,
+}
+#}</code></pre></pre>
+<p>执行器本身只是将这个状态用<code>Arc</code>和<code>Mutex</code>包装起来, 允许它能够被其他线程<em>使用</em>
+(即使所有任务都可以局部线程中运行):</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+#[derive(Clone)]
+pub struct ToyExec {
+    state: Arc&lt;Mutex&lt;ExecState&gt;&gt;,
+}
+#}</code></pre></pre>
+<p>现在, <code>ExecState</code>的<code>tasks</code>字段提供了<code>TaskEntry</code>实例, 这些实例包装了一个具体任务, 
+和对应的<code>Waker</code>:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+struct TaskEntry {
+    task: Box&lt;ToyTask + Send&gt;,
+    wake: Waker,
+}
+#}</code></pre></pre>
+<p>最后, 我们需要一些创建执行器并修改执行器状态的模板:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+impl ToyExec {
+    pub fn new() -&gt; Self {
+        ToyExec {
+            state: Arc::new(Mutex::new(ExecState {
+                next_id: 0,
+                tasks: HashMap::new(),
+                ready: HashSet::new(),
+                thread: thread::current(),
+            })),
+        }
+    }
+
+    // a convenience method for getting our hands on the executor state
+    fn state_mut(&amp;self) -&gt; MutexGuard&lt;ExecState&gt; {
+        self.state.lock().unwrap()
+    }
+}
+#}</code></pre></pre>
+<p>有了这些模板代码, 我们可以开始关注于执行器的内部工作原理. 我们最好从核心执行器
+循环开始. 简便起见, 这个循环从来不退出; 它的职责仅仅是继续跑完所有分出线程的
+新任务:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+impl ToyExec {
+    pub fn run(&amp;self) {
+        loop {
+            // Each time around, we grab the *entire* set of ready-to-run task IDs:
+            let mut ready = mem::replace(&amp;mut self.state_mut().ready, HashSet::new());
+
+            // Now try to `complete` each ready task:
+            for id in ready.drain() {
+                // we take *full ownership* of the task; if it completes, it will
+                // be dropped.
+                let entry = self.state_mut().tasks.remove(&amp;id);
+                if let Some(mut entry) = entry {
+                    if let Async::Pending = entry.task.poll(&amp;entry.wake) {
+                        // The task hasn't completed, so put it back in the table.
+                        self.state_mut().tasks.insert(id, entry);
+                    }
+                }
+            }
+
+            // we'd processed all work we acquired on entry; block until more work
+            // is available. If new work became available after our `ready` snapshot,
+            // this will b no-op.
+            thread::park();
+        }
+    }
+}
+#}</code></pre></pre>
+<p>这里精妙的地方是, 在每一轮循环, 我们<em>在开始的时候</em><code>poll</code>所有准备好的东西, 然后
+&quot;park&quot;线程. <code>std</code>库的<a href="https://static.rust-lang.org/doc/master/std/thread/fn.park.html"><code>park</code></a>/<a href="https://static.rust-lang.org/doc/master/std/thread/struct.Thread.html#method.unpark"><code>unpark</code></a>让处理阻塞和唤醒OS线程变得很容易. 在
+这个例子里, 我们想要的是执行器底层的OS线程阻塞, 直到一些额外的任务已经就绪. 这样
+的话, 即使我们无法唤醒线程, 也不会有任何风险: 如果另外的线程在我们初次读取
+<code>ready</code>集与调用<code>park</code>方法之间调用了<code>unpark</code>方法, <code>park</code>方法就会马上返回.</p>
+<p>另一方面, 一个任务会像这样被唤醒:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+impl ExecState {
+    fn wake_task(&amp;mut self, id: usize) {
+        self.ready.insert(id);
+
+        // *after* inserting in the ready set, ensure the executor OS
+        // thread is woken up if it's not already running.
+        self.thread.unpark();
+    }
+}
+
+struct ToyWake {
+    // A link back to the executor that owns the task we want to wake up.
+    exec: ToyExec,
+
+    // The ID for the task we want to wake up.
+    id: usize,
+
+impl Wake for ToyWake {
+    fn wake(&amp;self) {
+        self.exec.state_mut().wake_task(self.id);
+    }
+}
+#}</code></pre></pre>
+<p>剩下的部分就很直接了. <code>spawn</code>方法负责将任务包装成<code>TaskEntry</code>并执行它:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+impl ToyExec {
+    pub fn spawn&lt;T&gt;(&amp;self, task: T)
+        where T: Task + Send + 'static
+    {
+        let mut state = self.state_mut();
+
+        let id = state.next_id;
+        state.next_id += 1;
+
+        let wake = ToyWake { id, exec: self.clone() };
+        let entry = TaskEntry {
+            wake: Waker::from(Arc::new(wake)),
+            task: Box::new(task)
+        };
+        state.tasks.insert(id, entry);
+
+        // A newly-added task is considered immediately ready to run,
+        // which will cause a subsequent call to `park` to immediately
+        // return.
+        state.wake_task(id);
+    }
+}
+#}</code></pre></pre>
+<p>好了, 我们造了个任务调度器了! 但是在高兴之余, 一个很重要的地方是, 我们发现前面的
+实现会因为<code>Arc</code>循环引用而导致任务泄露. 试着解决这个问题吧, 这是个很好的练习.</p>
+<p>但是, 就算解决了上面的问题, 它仍然是个&quot;玩具&quot;执行器. 现在, 让我们继续造个事件源,
+让任务等待去处理.</p>
+<blockquote>
+<p><a href="https://github.com/aturon/apr/blob/ffb00140a767d6e7a4a8875bf6965d10f830a271/src/task-model/events.md">task-model/events.md</a>
+commit ffb00140a767d6e7a4a8875bf6965d10f830a271</p>
+</blockquote>
+<h1><a class="header" href="#一个玩具事件循环" id="一个玩具事件循环">一个玩具事件循环</a></h1>
+<p>异步编程经常被用于I/O, 但其实有很多其他类型的事件源. 在这一小节, 我们将会构建
+一个简单的<em>事件循环</em>, 它将允许你注册一些可以在将来被唤醒的任务.</p>
+<p>为了完成这件事, 我们需要一个专门的定时器事件线程, 它的工作就是在正确的时间唤醒
+并执行任务. 这个定时器的消费者们只需要告诉定时器什么时候应该要唤醒它们, 以及如何
+唤醒: </p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+use std::collections::BTreeMap;
+use std::sync::{Arc, mpsc};
+use std::thread;
+use std::time::{Duration, Instant};
+
+/// A handle to a timer, used for registering wakeups
+#[derive(Clone)]
+struct ToyTimer {
+    tx: mpsc::Sender&lt;Registration&gt;,
+}
+
+/// A wakeup request
+struct Registration {
+    at: Instant,
+    wake: Waker,
+}
+
+/// State for the worker thread that processes timer events
+struct Worker {
+    rx: mpsc::Receiver&lt;Registration&gt;,
+    active: BTreeMap&lt;Instant, Waker&gt;
+}
+
+impl ToyTimer {
+    fn new() -&gt; ToyTimer {
+        let (tx, rx) = mpsc::channel();
+        let worker = Worker { rx, active: BTreeMap::new() };
+        thread::spawn(|| worker.work());
+        ToyTimer { tx }
+    }
+
+    // Register a new wakeup with this timer
+    fn register(&amp;self, at: Instant, wake: Waker) {
+        self.tx.send(Registration { at, wake }).unwrap();
+    }
+}
+
+#}</code></pre></pre>
+<p>时间循环在<code>Worker::work</code>方法里面实现. 基本的目标特简单: 我们维护一个记录目前
+已注册的唤醒句柄(wakeups)的<code>BTreeMap</code>, 并且用一个通道(channel)来进行注册. 这样做
+的好处是:如果还没有到触发(fire)任何句柄的时刻, 但是我们已经有了一些注册好的句柄,
+我们可以用通道上的<code>recv_timeout</code>方法来等待<em>要么</em>一个进来的新注册事件, <em>或者</em>等待
+触发第一个已有句柄的时刻:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+impl Worker {
+    fn enroll(&amp;mut self, item: Registration) {
+        if self.active.insert(item.at, item.wake).is_some() {
+            // this simple setup doesn't support multiple registrations for
+            // the same instant; we'll revisit that in the next section.
+            panic!(&quot;Attempted to add to registrations for the same instant&quot;)
+        }
+    }
+
+    fn fire(&amp;mut self, key: Instant) {
+        self.active.remove(&amp;key).unwrap().wake();
+    }
+
+    fn work(mut self) {
+        loop {
+            if let Some(first) = self.active.keys().next().cloned() {
+                let now = Instant::now();
+                if first &lt;= now {
+                    self.fire(first);
+                } else {
+                    // we're not ready to fire off `first` yet, so wait until we are
+                    // (or until we get a new registration, which might be for an
+                    // earlier time).
+                    if let Ok(new_registration) = self.rx.recv_timeout(first - now) {
+                        self.enroll(new_registration);
+                    }
+                }
+            } else {
+                // no existing registrations, so unconditionally block until
+                // we receive one.
+                let new_registration = self.rx.recv().unwrap();
+                self.enroll(new_registration);
+            }
+        }
+    }
+}
+#}</code></pre></pre>
+<p>完成了! 这种&quot;事件循环&quot;模式, 一个专用线程在不停地处理事件与注册(或阻塞直到有
+新事件触发或注册), 是异步编程的基础. 幸运的是, 在Rust里<em>实现</em>异步编程, 你可以用
+现成的(off-the-shelf)事件循环来驱动你感兴趣的事件, 而我们将会在下一章中看到.</p>
+<p>但在那之前, 我们先把前面的执行器, 调度器整合成一个简单的app吧.</p>
+<blockquote>
+<p><a href="https://github.com/aturon/apr/blob/ffb00140a767d6e7a4a8875bf6965d10f830a271/src/task-model/finish.md">task-model/finish.md</a>
+commit ffb00140a767d6e7a4a8875bf6965d10f830a271</p>
+</blockquote>
+<h1><a class="header" href="#整合任务执行器与事件循环" id="整合任务执行器与事件循环">整合任务执行器与事件循环</a></h1>
+<p>至此, 我们已经做了一个简单的执行器, 以在单线程中执行多个任务, 以及一个简单的
+事件循环以分发定时事件, 当然用的也是单线程. 现在, 我们将他们整合到一起来构建一个
+app, 这个app能够支持任意数量的周期任务&quot;dinging&quot;, 而只需要两个OS线程.</p>
+<p>为了达成这个目标, 我们需要创建一个<code>Periodic</code>任务:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+struct Periodic {
+    // a name for this task
+    id: u64,
+
+    // how often to &quot;ding&quot;
+    period: Duration,
+
+    // when the next &quot;ding&quot; is scheduled
+    next: Instant,
+
+    // a handle back to the timer event loop
+    timer: Timer,
+}
+
+impl Periodic {
+    fn new(id: u64, period: Duration, timer: Timer) -&gt; Periodic {
+        Periodic {
+            id, period, timer, next: Instant::now() + period
+        }
+    }
+}
+#}</code></pre></pre>
+<p><code>period</code>字段告诉我们要多频繁地打印&quot;ding&quot;信息. 这个实现很直接: 告诉任务是要永远
+执行, 并且持续地在每经过一个<code>period</code>时间后打印一次信息:</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+impl Task for Periodic {
+    fn poll(&amp;mut self, wake: &amp;Waker) -&gt; Async&lt;()&gt; {
+        // are we ready to ding yet?
+        let now = Instant::now();
+        if now &gt;= self.next {
+            self.next = now + self.period;
+            println!(&quot;Task {} - ding&quot;, self.id);
+        }
+
+        // make sure we're registered to wake up at the next expected `ding`
+        self.timer.register(self.next, wake);
+        Async::Pending
+    }
+}
+#}</code></pre></pre>
+<p>然后, 把以上的东西都放到一起:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">fn main() {
+    let timer = ToyTimer::new();
+    let exec = ToyExec::new();
+
+    for i in 1..10 {
+        exec.spawn(Periodic::new(i, Duration::from_millis(i * 500), timer.clone()));
+    }
+
+    exec.run()
+}
+</code></pre></pre>
+<p>这个程序最后产生类似这样的输出:</p>
+<pre><code>Task 1 - ding
+Task 2 - ding
+Task 1 - ding
+Task 3 - ding
+Task 1 - ding
+Task 4 - ding
+Task 2 - ding
+Task 1 - ding
+Task 5 - ding
+Task 1 - ding
+Task 6 - ding
+Task 2 - ding
+Task 3 - ding
+Task 1 - ding
+Task 7 - ding
+Task 1 - ding
+...
+</code></pre>
+<p>回过头看, 我们所做的有点魔法: <code>Periodic</code>的<code>Task</code>实现直接说明<em>单个任务</em>所应具有的
+行为, 但之后我们把一堆任务交织(interleave)到仅仅两个OS线程! 这就是异步的力量!</p>
+<h2><a class="header" href="#练习-多任务同时注册" id="练习-多任务同时注册">练习: 多任务同时注册</a></h2>
+<p>例子的定时器事件循环有个panic代码: &quot;无法在同一时刻注册任务&quot;.</p>
+<ul>
+<li>可以在实例的程序中遇到这个panic吗?</li>
+<li>如果我们仅仅是移除了panic, 会发生什么?</li>
+<li>如何改进代码来完全避免这个问题呢?</li>
+</ul>
+<h2><a class="header" href="#练习-逐渐结束程序" id="练习-逐渐结束程序">练习: 逐渐结束程序</a></h2>
+<p><code>Periodic</code>和<code>ToyExec</code>都被设计成不会停止的.</p>
+<ul>
+<li>修改<code>Periodic</code>, 使得每个实例能够被设置为只会ding固定次数, 然后对应的任务停止.</li>
+<li>修改<code>ToyExec</code>, 使得当没有任务存在的时候, 他会停止执行.</li>
+<li>测试你的方案!</li>
+</ul>
+<h1><a class="header" href="#the-real-task-system" id="the-real-task-system">The real task system</a></h1>
+<h1><a class="header" href="#实用任务系统" id="实用任务系统">实用任务系统</a></h1>
+<p>We've worked through toy definitions of a number of components in this chapter,
+but now it's time to get acquainted with the more efficient and powerful
+abstractions that are part of the <code>futures</code> crate.
+在这一章前面的部分, 我们已经完成了一系列组件的简单定义, 现在是时候让我们来理解
+更加有效和强大的抽象方式. 这些抽象已经整合到了<code>futures</code>库中.</p>
+<ul>
+<li><a href="task-model/real/task-model/real/tasks.html"><code>futures</code>故事之任务</a>.</li>
+<li><a href="task-model/real/task-model/real/exec.html"><code>futures</code>故事之执行器</a>.</li>
+<li><a href="task-model/real/task-model/real/events.html"><code>futures</code>故事之时间循环</a>.</li>
+</ul>
+<blockquote>
+<p><a href="https://github.com/aturon/apr/blob/ffb00140a767d6e7a4a8875bf6965d10f830a271/src/task-model/real/tasks.md">task-model/real/tasks.md</a>
+commit ffb00140a767d6e7a4a8875bf6965d10f830a271</p>
+</blockquote>
+<h1><a class="header" href="#任务" id="任务">任务</a></h1>
+<p><code>futures</code>库没有直接定义<code>Task</code>trait, 取而代之地定义了更加通用的概念<em>futures</em>,
+我们很快将深入了解它的细节. 现在, 让我们看看future的核心定义吧:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+/// An asynchronous computation that completes with a value or an error.
+trait Future {
+    type Item;
+    type Error;
+
+    /// Attempt to complete the future, yielding `Ok(Async::Pending)`
+    /// if the future is blocked waiting for some other event to occur.
+    fn poll(&amp;mut self, cx: task::Context) -&gt; Poll&lt;Self::Item, Self::Error&gt;;
+}
+
+type Poll&lt;T, E&gt; = Result&lt;Async&lt;T&gt;, E&gt;;
+#}</code></pre></pre>
+<p>Futures很像任务, 除了他们返回的是一个result(这允许它们进行组合). 换言之, 你可以
+将<em>任务</em>理解为是任意实现了<code>Future&lt;Item = (), Error = !&gt;</code>的类型</p>
+<p>然而, 它们还有其他区别: Futures不需要<code>WakeHandle</code>参数. 实践中, 这个参数几乎总是
+从执行器处创建到将句柄(handle)排队时被传递下来并保持不变, 因此, 在<code>futures</code>库
+里, 执行器在现成局部变量里面提供了方便的<code>WakeHanle</code>. 你可以用<code>futures::task</code>里
+的<code>curent_wake</code>函数来获得它:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+/// When called within a task being executed, returns the wakeup handle for
+/// that task. Panics if called outside of task execution.
+fn current_wake() -&gt; WakeHandle;
+#}</code></pre></pre>
+<h2><a class="header" href="#理解future和toytask的关联" id="理解future和toytask的关联">理解<code>Future</code>和<code>ToyTask</code>的关联</a></h2>
+<p>能够知道<code>Future</code>和<code>ToyTask</code>如何<em>精确地</em>联系在一起是很有帮助的. 为此, 我们引入了
+一个包装类型来将<code>ToyTask</code>转换成<code>Future</code>:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+use futures::task;
+use futures::{Future, AsyncResult};
+
+struct ToyTaskToFuture&lt;T&gt;(T);
+
+impl&lt;T: ToyTask&gt; Future for ToyTaskToFuture&lt;T&gt; {
+    type Item = ();
+    type Error = !;
+
+    fn get(&amp;mut self) -&gt; AsyncResult&lt;(), !&gt; {
+        Ok(self.0.complete(task::current_wake()))
+    }
+}
+#}</code></pre></pre>
+<blockquote>
+<p><a href="https://github.com/aturon/apr/blob/01ce17e6d1a62ffc514099e78b279399673ef2f9/src/task-model/real/exec.md">task-model/real/exec.md</a> 
+commit 01ce17e6d1a62ffc514099e78b279399673ef2f9</p>
+</blockquote>
+<h1><a class="header" href="#执行器" id="执行器">执行器</a></h1>
+<p>First off, in the <code>futures</code> crate, executors are objects that can spawn a
+<code>Future&lt;Item = (), Error = !&gt;</code> as a new task. There are two key executors to be
+familiar with.
+首先, 在<code>futures</code>库里, 执行器是能够产生作为(spawn)新任务的
+<code>Future&lt;Item = (), Error = !&gt;</code>对象的对象. 有两种关键的执行器需要熟悉</p>
+<h2><a class="header" href="#线程池threadpool执行器" id="线程池threadpool执行器">线程池(<code>ThreadPool</code>)执行器</a></h2>
+<p>The simplest executor is <code>futures::executor::ThreadPool</code>, which schedules tasks
+onto a fixed pool of OS threads. Splitting the tasks across multiple OS threads
+means that even if a particular <code>tick</code> invocation takes a long time, other tasks
+can continue to make progress on other threads.
+最简单的执行器是<code>futures::executor::ThreadPool</code>, 能够在固定OS线程数量的线程池上
+调度任务. 将任务跨线程分离意味着如果一个特定的<code>tick</code>调度花费太长的时间, 其他任务
+能够在其他线程上继续进行.</p>
+<p>初始化和使用也是很直接:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+// Set up the thread pool, which spins up worker threads behind the scenes.
+let exec = ThreadPool::new();
+
+// Spawn tasks onto the thread pool.
+exec.spawn(my_task);
+exec.spawn(other_task);
+#}</code></pre></pre>
+<p>后面我们会看到一系列沟通已产生任务的不同方法.</p>
+<p>请注意, 因为任务会在任意线程上执行, 所以它需要满足<code>Send</code>和<code>'static</code></p>
+<h2><a class="header" href="#当前线程currentthread执行器" id="当前线程currentthread执行器">当前线程(<code>CurrentThread</code>)执行器</a></h2>
+<p><code>futures</code>库也提供了一个单线程执行器<code>CurrentThread</code>, 类似我们创建的那个玩具版本.
+它和线程池执行器的关键不同点是<code>CurrentThread</code>能够执行非<code>Send</code>和非<code>'static</code>任务,
+因为该执行器是通过在当前线程显式地被调用:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+// start up the CurrentThread executor, which by default runs until all spawned
+// tasks are complete:
+CurrentThread::run(|_| {
+    CurrentThread::spawn(my_task);
+    CurrentThread::spawn(other_task);
+})
+#}</code></pre></pre>
+<p><code>ThreadPool</code>和<code>CurrentThread</code>执行器之间的取舍会在
+<a href="task-model/real/async-in-practice/concurrency.html">本书后面章节</a>中详细解释.</p>
+<h2><a class="header" href="#伪唤醒spurious-wakeups" id="伪唤醒spurious-wakeups">伪唤醒(Spurious wakeups)</a></h2>
+<p>总的来说, 执行器保证了它们会在任务被唤醒的任何时候去调用对应的<code>get</code>方法. 然而,
+它们<em>也</em>可以在其他时候调用<code>get</code>. 因此, 任务不能假设每次<code>get</code>的调用都有进展; 它们
+应该经常重试之前阻塞了它们的操作, 并且准备再次等待</p>
+<h2><a class="header" href="#练习" id="练习">练习</a></h2>
+<ul>
+<li>用<code>ThreadPool</code>执行器重写前面小结的例子</li>
+<li>用<code>CurrentThread</code>执行器重写前面小结的例子</li>
+<li>对于timer例子, 使用这两种执行器的取舍是什么?</li>
+</ul>
+<h1><a class="header" href="#event-loops" id="event-loops">Event loops</a></h1>
+<h1><a class="header" href="#tokio-async-network-io" id="tokio-async-network-io">Tokio: async network I/O</a></h1>
+<p>The <code>tokio</code> crate complements the <code>futures</code> crate by providing a low-level,
+cross-platform way to do asynchronous network I/O. The crate's API is modeled
+after <code>std::net</code> and provides async versions of the same core functionality,
+with strong cross-platform support.</p>
+<p>This chapter covers both the primary <code>tokio</code> networking APIs as well as some
+important tools in the <code>futures</code> crate for doing async I/O in general. It closes
+by building a proxy server using <code>tokio</code> directly that aims for low overhead by
+minimizing the number of in-flight buffers needed at any time.</p>
+<h1><a class="header" href="#acquiring-a-socket" id="acquiring-a-socket">Acquiring a socket</a></h1>
+<p>Accepting TCP connections with Tokio is much like doing so with <code>std::net</code>,
+except that it works asynchronously. In particular, <code>tokio::net</code> contains a
+<code>TcpListener</code> with an API similar to the <code>std::net</code> version:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+type AsyncIoResult&lt;T&gt; = AsyncResult&lt;T, io::Error&gt;;
+
+impl TcpListener {
+    fn bind(addr: &amp;SocketAddr) -&gt; io::Result&lt;TcpListener&gt;;
+    fn accept(&amp;mut self) -&gt; AsyncIoResult&lt;(TcpStream, SocketAddr)&gt;;
+}
+#}</code></pre></pre>
+<p>Just like the occurrence of <code>Result</code> in a signature tells you that a function
+may fail with an error, the occurrence of <code>Async</code> or <code>AsyncResult</code> tells you
+that the function is intended to be used within the async task system. Thus,
+looking at the two functions above, we can see that <code>bind</code> is a a standard
+synchronous function, while <code>accept</code> is an asynchronous method.</p>
+<p>To quickly see these APIs in action, let's build a future that will accept
+connections asynchronously, record the peer address, and then close the
+connection:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+use tokio::net::TcpListener;
+
+struct LogAndDrop {
+    listener: TcpListener,
+}
+
+impl LogAndDrop {
+    fn new(addr: &amp;SocketAddr) -&gt; io::Result&lt;LogAndDrop&gt; {
+        LogAndDrop {
+            listener: TcpListener::bind(addr)?
+        }
+    }
+}
+
+impl Future for LogAndDrop {
+    type Item = ();
+    type Error = io::Error;
+
+    fn complete(&amp;mut self) -&gt; AsyncIoResult&lt;()&gt; {
+        loop {
+            match self.listener.accept(wake) {
+                Ok(Async::Done((_, peer))) =&gt; {
+                    println!(&quot;Connected to peer {:?}&quot;, peer);
+                }
+                Ok(Async::WillWake) =&gt; {
+                    return Ok(Async::WillWake);
+                }
+                Err(e) =&gt; {
+                    println!(&quot;Error: {:?}; shutting down&quot;, e);
+                    return Err(e);
+                }
+            }
+        }
+    }
+}
+#}</code></pre></pre>
+<p>Note that, in the case that we succeed in accepting a connection, after logging
+it we immediately loop and try to take another. This is typical for async tasks:
+the task code does as much work as it possibly can, stopping only when
+encountering an obstruction (such as the listener returning <code>WillWake</code>), at
+which point it will be descheduled and woken up later, when the obstruction has
+been cleared.</p>
+<h1><a class="header" href="#reading-and-writing" id="reading-and-writing">Reading and writing</a></h1>
+<p>The <code>futures</code> crate contains an <code>io</code> module, which is the async counterpart to
+<code>std::io</code>. That module defines, in particular, the core primitives for doing
+async reading, writing, and flushing:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+trait AsyncRead {
+    fn read(&amp;mut self, buf: &amp;mut [u8]) -&gt; AsyncIoResult&lt;usize&gt;;
+}
+
+trait AsyncWrite {
+    fn write(&amp;mut self, buf: &amp;[u8]) -&gt; AsyncIoResult&lt;usize&gt;;
+    fn flush(&amp;mut self) -&gt; AsyncIoResult&lt;()&gt;;
+}
+#}</code></pre></pre>
+<p>These methods work exactly like their counterparts in <code>std</code>, except that if the
+underlying I/O object is not ready to perform the requested action, they return
+<code>Ok(Async::WillWake)</code>, and stash the given <code>wake</code> to be used once I/O is
+ready. Once more, the fact that their result type involves <code>Async</code> is the clear
+signal that they plug into the async task system.</p>
+<h2><a class="header" href="#example-echoing-input" id="example-echoing-input">Example: echoing input</a></h2>
+<p>While the <code>AsyncRead</code> and <code>AsyncWrite</code> traits are simple enough, there are some
+significant differences in <em>using</em> them, compared to the synchronous
+versions. Most importantly, async tasks generally have an explicit <em>overall
+state</em> associated with them (which plays the role usually played by the stack in
+synchronous programming). To see this concretely, let's write a task for echoing
+everything sent on a socket. First, the basic setup:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+use tokio::net::TcpStream;
+
+// The task structure -- echoing on a *single* connection
+struct Echo {
+    // The connection
+    io: TcpStream,
+
+    // Buffered data to be echoed back
+    buf: Vec&lt;u8&gt;,
+
+    // The current state of the &quot;echo state machine&quot;
+    state: EchoState,
+}
+
+enum EchoState {
+    // The next step is reading into `buf`, from the front
+    Reading,
+
+    // The next step is echoing back out `buf`, from the
+    // given start and end points.
+    Writing(usize, usize),
+}
+
+impl Echo {
+    fn new(io: TcpStream) -&gt; Echo {
+        Echo {
+            io,
+            state: EchoState::Reading,
+            buf: vec![0; 4096],
+        }
+    }
+}
+#}</code></pre></pre>
+<p>The idea then is that the <code>Echo</code> task alternates between reading and writing. If
+at any point it is unable to perform that task, it returns <code>Async::WillWake</code>,
+having been enrolled to be woken when the needed I/O is available. Such
+state-machine tasks almost always have an outer <code>loop</code> that continuously moves
+through the states until an obstruction is reached:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+impl Future for Echo {
+    type Item = ();
+    type Error = io::Error;
+
+    fn complete(&amp;mut self) -&gt; AsyncIoResult&lt;()&gt; {
+        loop {
+            self.state = match self.state {
+                EchoState::Reading =&gt; {
+                    match self.io.read(&amp;mut self.buf)? {
+                        Async::WillWake =&gt; return Ok(Async::WillWake),
+                        Async::Done(len) =&gt; EchoState::Writing(0, len),
+                    }
+                }
+                EchoState::Writing(from, to) if from &gt;= to =&gt; {
+                    EchoState::Reading
+                }
+                EchoState::Writing(from, to) =&gt; {
+                    match self.io.write(&amp;self.buf[from..to])? {
+                        Async::WillWake =&gt; return Ok(Async::WillWake),
+                        Async::Done(n) =&gt; EchoState::Writing(from + n, to),
+                    }
+                }
+            };
+        }
+    }
+}
+#}</code></pre></pre>
+<p>It's important to note that we can freely &quot;bubble up&quot; <code>WillWake</code>, because if a
+function like <code>read</code>, returns it, that function has already <em>guaranteed</em> to wake
+up our task when <code>read</code>ing is possible. In particular, the <code>tokio</code> crate takes
+care of stashing the <code>WakeHandle</code> as necessary whenever we attempt an
+<code>AsyncRead::read</code>, and so on. All we have to do is bubble out the <code>WillWake</code>
+result.</p>
+<p>While the code here is not <em>so</em> complicated, it's a bit noisy for something so
+simple. Much of the rest of this book will cover higher-level abstractions that
+cut down on the noise. For this kind of low-level programming, though, the
+futures crate provides a <code>try_done</code> macro that works much like the <code>?</code> operator,
+except that it <em>also</em> bubbles out <code>Async::WillWake</code>. Using that macro, we can
+rewrite the code as follows:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+impl Future for Echo {
+    type Item = ();
+    type Error = io::Error;
+
+    fn complete(&amp;mut self) -&gt; AsyncIoResult&lt;()&gt; {
+        loop {
+            self.state = match self.state {
+                EchoState::Reading =&gt; {
+                    let let = try_done!(self.io.read(&amp;mut self.buf));
+                    EchoState::Writing(0, len)
+                }
+                EchoState::Writing(from, to) if from &gt;= to =&gt; {
+                    EchoState::Reading
+                }
+                EchoState::Writing(from, to) =&gt; {
+                    let n = try_done!(self.io.write(&amp;self.buf[from..to]))
+                    EchoState::Writing(from + n, to)
+                }
+            };
+        }
+    }
+}
+#}</code></pre></pre>
+<p>As we'll see in the <a href="tokio/futures/_chapter.html">Futures</a> chapter, though, we'll
+ultimately do better than this, by avoid writing a state machine at all.</p>
+<h2><a class="header" href="#exercises" id="exercises">Exercises</a></h2>
+<ul>
+<li>What would happen if we did not include the outer <code>loop</code>?</li>
+<li>Use the <code>CurrentThread</code> executor and <code>TcpListener</code> to turn the above code into
+a complete, working server.</li>
+</ul>
+<p>https://gist.github.com/alexcrichton/da80683060f405d6be0e06b426588886</p>
+<h1><a class="header" href="#transforming-at-the-byte-level" id="transforming-at-the-byte-level">Transforming at the byte level</a></h1>
+<h1><a class="header" href="#closing-down-a-connection" id="closing-down-a-connection">Closing down a connection</a></h1>
+<p>In the synchronous world, you often don't have to worry too much about
+flushing. You can freely write to a buffered I/O object and it will periodically
+flush as you do so. And, most importantly, if at any point you <em>drop</em> the
+object, the remaining content of the buffer is automatically flushed. Worst
+case, there is an error trying to perform this flush, which gets swallowed; but
+generally there's not much you could've done about such an error anyway.</p>
+<p>In the async world, flushing is more critical, for a simple reason: <strong>the model
+does not afford us the ability to automatically flush on drop</strong>. In particular,
+<em>forcing</em> a flush means potentially blocking the calling thread until that flush
+completes. Since async I/O objects are generally floating around within executor
+tasks, this is a non-starter; blocking an executor can bring the whole system to
+a halt.</p>
+<p>Thus, it's critical to ensure all data is flushed before dropping an async I/O
+object, using <code>AsyncWrite::flush</code>.</p>
+<h1><a class="header" href="#futures" id="futures">Futures</a></h1>
+<p>Up until now, we've been working with the task model and I/O events in a
+&quot;direct&quot; way, writing code that manually juggles <code>Async</code> values and
+<code>WakeHandle</code>s. In this chapter, we'll see how this kind of code can be fit into
+a general abstraction, <em>futures</em>, that provides a number of tools for working at
+a higher level.</p>
+<h1><a class="header" href="#the-core-definition" id="the-core-definition">The core definition</a></h1>
+<p>In Rust, a future is <strong>an asynchronous computation that can be driven to produce
+a value</strong>. It represents a value that may become available in the future, but
+which requires pushing along the computation to produce it.</p>
+<p>We've <a href="futures/task-model/real/tasks.html">already seen</a> the core definitions of the
+<code>Future</code> trait, describing such computations:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+/// An asynchronous computation that completes with a value or an error.
+trait Future {
+    type Item;
+    type Error;
+
+    /// Attempt to complete the future, yielding `Ok(Async::WillWake)`
+    /// if the future is blocked waiting for some other event to occur.
+    fn get(&amp;mut self) -&gt; AsyncResult&lt;Self::Item, Self::Error&gt;;
+
+    // ... and a large number of default methods that we'll meet shortly!
+}
+
+type AsyncResult&lt;T, E&gt; = Result&lt;Async&lt;T&gt;, E&gt;;
+
+enum Async&lt;T&gt; {
+    /// Work completed with a result of type `T`.
+    Done(T),
+
+    /// Work was blocked, and the task is set to be woken when ready
+    /// to continue.
+    WillWake,
+}
+#}</code></pre></pre>
+<p>Just calling <code>get</code> once does <em>not</em> guarantee that a final value will be
+produced, and if the future is blocked waiting on some other event to occur, it
+is not guaranteed to make progress until <code>get</code> is called again. The first part
+of this chapter will focus on exactly <em>who</em> calls <code>get</code>, and <em>when</em>.</p>
+<p>What makes futures interesting is that, by abstracting out the very general idea
+of &quot;computing something asychronously&quot;, we make it possible to combine such
+computations in expressive and surprising ways. This also informs their
+relationship to tasks: a task is generally made up of a number of smaller
+futures that have been stitched together.</p>
+<h1><a class="header" href="#example-readexact" id="example-readexact">Example: <code>ReadExact</code></a></h1>
+<p>Let's get started with a useful example. The standard library's <code>Read</code> trait
+provides a convenient function, <code>read_exact</code>, which reads a specific number of
+bytes from an I/O object (which may require issuing multiple calls to the <code>read</code>
+method).</p>
+<p>We want to &quot;port&quot; this functionality to the async world. Futures are a perfect
+match: we can represent</p>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+struct ReadExactData&lt;R&gt; {
+    reader: R,
+    buf: Vec&lt;u8&gt;,
+}
+
+struct ReadExact&lt;R&gt; {
+    data: Option&lt;ReadExactData&lt;R&gt;&gt;,
+    from: usize,
+    to: usize,
+}
+
+fn read_exact&lt;R&gt;(reader: R, len: usize) -&gt; ReadExact&lt;R&gt; {
+    ReadExact {
+        data: Some(ReadExactData {
+            reader,
+            buf: vec![0; len],
+        },
+        from: 0,
+        to: len,
+    }
+}
+#}</code></pre></pre>
+<pre><pre class="playpen"><code class="language-rust no_run">
+# #![allow(unused_variables)]
+#fn main() {
+impl&lt;R: AsyncRead&gt; Future for ReadExact&lt;R&gt; {
+    type Item = ReadExactData&lt;R&gt;;
+    type Error = io::Error;
+
+    fn get(&amp;mut self) -&gt; AsynIoResult&lt;Self::Item&gt; {
+        use std::mem;
+
+        while self.from &lt; self.to {
+            let data = self.data.as_mut().unwrap();
+            let n = try_done!(data.read(&amp;mut data.buf[data.from .. data.to]));
+            data.from += n;
+        }
+
+        Ok(Async::Done(self.data.take().unwrap()))
+    }
+}
+#}</code></pre></pre>
+<h1><a class="header" href="#example-a-timeout-wrapper" id="example-a-timeout-wrapper">Example: a timeout wrapper</a></h1>
+<h1><a class="header" href="#push-and-pull-futures-and-tasks" id="push-and-pull-futures-and-tasks">Push and pull: futures and tasks</a></h1>
+<p>This description is hopefully not surprising, given the previous few
+chapters. However, it's important to realize that this setup is <em>drastically</em>
+different from futures (aka promises) in other languages:</p>
+<ul>
+<li>
+<p>Rust futures follow a <em>pull</em> model, where, once a future is blocked by an
+event, it must be retried through a call to <code>get</code> (i.e., by repeatedly trying
+to &quot;pull&quot; a value out).</p>
+</li>
+<li>
+<p>Other futures libraries follow a <em>push</em> model, where the completion of one
+event <em>automatically</em> triggers a cascade of follow-up work, <em>pushing</em> the
+computation forward. That follow-up work is usually given by registering
+callbacks with a future.</p>
+</li>
+</ul>
+<h2><a class="header" href="#tasks-where-push-meets-pull" id="tasks-where-push-meets-pull">Tasks: where push meets pull</a></h2>
+<h1><a class="header" href="#the-combinators" id="the-combinators">The combinators</a></h1>
+<h1><a class="header" href="#cancellation" id="cancellation">Cancellation</a></h1>
+<h1><a class="header" href="#relating-sync-and-async" id="relating-sync-and-async">Relating sync and async</a></h1>
+<h1><a class="header" href="#示例-rpc客户端" id="示例-rpc客户端">示例: RPC客户端</a></h1>
+<h1><a class="header" href="#the-core-definition-1" id="the-core-definition-1">The core definition</a></h1>
+<h1><a class="header" href="#the-combinators-1" id="the-combinators-1">The combinators</a></h1>
+<h1><a class="header" href="#example-a-stream-of-lines" id="example-a-stream-of-lines">Example: a stream of lines</a></h1>
+<h1><a class="header" href="#the-core-definition-2" id="the-core-definition-2">The core definition</a></h1>
+<h1><a class="header" href="#the-combinators-2" id="the-combinators-2">The combinators</a></h1>
+<h1><a class="header" href="#example-write-buffering" id="example-write-buffering">Example: write buffering</a></h1>
+<h1><a class="header" href="#framing" id="framing">Framing</a></h1>
+<h1><a class="header" href="#decoding" id="decoding">Decoding</a></h1>
+<h1><a class="header" href="#encoding" id="encoding">Encoding</a></h1>
+<h1><a class="header" href="#length-delimited-framing" id="length-delimited-framing">Length-delimited framing</a></h1>
+<h1><a class="header" href="#transport-layers" id="transport-layers">Transport layers</a></h1>
+<h1><a class="header" href="#effective-programming-with-futures" id="effective-programming-with-futures">Effective programming with futures</a></h1>
+<h1><a class="header" href="#tasks-versus-threads" id="tasks-versus-threads">Tasks versus threads</a></h1>
+<h1><a class="header" href="#when-to-use-combinators" id="when-to-use-combinators">When to use combinators</a></h1>
+<h1><a class="header" href="#示例-github-api客户端" id="示例-github-api客户端">示例: Github API客户端</a></h1>
+<h1><a class="header" href="#buffering-and-bytes" id="buffering-and-bytes">Buffering and <code>bytes</code></a></h1>
+<h1><a class="header" href="#organizing-libraries-and-applications" id="organizing-libraries-and-applications">Organizing libraries and applications</a></h1>
+<h1><a class="header" href="#library-guidelines" id="library-guidelines">Library guidelines</a></h1>
+<h1><a class="header" href="#resource-management" id="resource-management">Resource management</a></h1>
+<h1><a class="header" href="#structuring-tasks" id="structuring-tasks">Structuring tasks</a></h1>
+<h1><a class="header" href="#graceful-shutdown" id="graceful-shutdown">Graceful shutdown</a></h1>
+<h1><a class="header" href="#backpressure" id="backpressure">Backpressure</a></h1>
+<h1><a class="header" href="#batteries-included" id="batteries-included">Batteries included</a></h1>
+<h1><a class="header" href="#networking" id="networking">Networking</a></h1>
+<h1><a class="header" href="#http" id="http">HTTP</a></h1>
+<h1><a class="header" href="#dns" id="dns">DNS</a></h1>
+<h1><a class="header" href="#tls" id="tls">TLS</a></h1>
+<h1><a class="header" href="#websockets" id="websockets">Websockets</a></h1>
+<h1><a class="header" href="#gzip" id="gzip">Gzip</a></h1>
+<h1><a class="header" href="#udp" id="udp">UDP</a></h1>
+<h1><a class="header" href="#services" id="services">Services</a></h1>
+<h1><a class="header" href="#databases" id="databases">Databases</a></h1>
+<h1><a class="header" href="#timers" id="timers">Timers</a></h1>
+<h1><a class="header" href="#file-io" id="file-io">File I/O</a></h1>
+<h1><a class="header" href="#processes" id="processes">Processes</a></h1>
+<h1><a class="header" href="#named-piped" id="named-piped">Named piped</a></h1>
+<h1><a class="header" href="#signals" id="signals">Signals</a></h1>
+<h1><a class="header" href="#inotify" id="inotify">inotify</a></h1>
+<h1><a class="header" href="#managing-the-tokio-event-loop" id="managing-the-tokio-event-loop">Managing the Tokio event loop</a></h1>
+<h1><a class="header" href="#building-a-custom-executor" id="building-a-custom-executor">Building a custom executor</a></h1>
+<h1><a class="header" href="#faq" id="faq">FAQ</a></h1>
+<h1><a class="header" href="#comparisons-to-other-languages" id="comparisons-to-other-languages">Comparisons to other languages</a></h1>
+<h1><a class="header" href="#rationale-for-the-pull-model" id="rationale-for-the-pull-model">Rationale for the &quot;pull&quot; model</a></h1>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>
